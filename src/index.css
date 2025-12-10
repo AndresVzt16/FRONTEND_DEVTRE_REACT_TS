@@ -1,4 +1,17 @@
+/* tailwind css v4.x */
 @import "tailwindcss";
+@import "tailwindcss-animated";
 @theme {
   --color-primary: #1e40af;
+  --font-family-sans: 'Inter', sans-serif;
+  
+  --color-avocado-100: oklch(0.99 0 0);
+  --color-avocado-200: oklch(0.98 0.04 113.22);
+  --color-avocado-300: oklch(0.94 0.11 115.03);
+  --color-avocado-400: oklch(0.92 0.19 114.08);
+  --color-avocado-500: oklch(0.84 0.18 117.33);
+  --color-avocado-600: oklch(0.53 0.12 118.34);
+  --color-avocado-700: oklch(0.36 0.10 116.96);
+  --color-avocado-800: oklch(0.23 0.08 116.19);
+  --color-avocado-900: oklch(0.14 0.06 115.45);
 }

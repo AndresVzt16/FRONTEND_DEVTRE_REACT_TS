@@ -4,7 +4,7 @@ export default function LoginView() {
     <>
 
       <nav>
-        <span>¿No tinenes una Cuenta?</span><Link to="/auth/register">Registrate</Link>
+        <span className="text-avocado-500">¿No tinenes una Cuenta?</span><Link to="/auth/register">Registrate</Link>
       </nav>
     </>
   );
