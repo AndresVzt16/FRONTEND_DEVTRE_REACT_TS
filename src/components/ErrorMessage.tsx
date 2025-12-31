@@ -1,9 +1,8 @@
-    
-type ErrorMessageProps = {
-    children: React.ReactNode
-}
-export default function ErrorMessage({children}:ErrorMessageProps) {
+
+const ErrorMessage = ({children}:{children:React.ReactNode}) => {
   return (
-    <p className="text-sm text-red-700 font-medium rounded  bg-red-50 px-4 py-2" >{children}</p>
+    <p className="bg-red-50 py-2 px-4 text-red-700 rounded text-sm font-semibold">{children}</p>
   )
 }
+
+export default ErrorMessage
