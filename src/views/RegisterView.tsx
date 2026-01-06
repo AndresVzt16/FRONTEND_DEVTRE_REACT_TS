@@ -46,7 +46,7 @@ export default function RegisterView() {
     const url = `${import.meta.env.VITE_API_BACKEND_URL}/auth/register`
     try {
       const {data} = await axios.post(url,formData)
-      toast.success(data)
+      toast.success(data.message)
       reset()
       
     } catch (error) {
@@ -61,10 +61,10 @@ export default function RegisterView() {
   return (
     <>
       <section className="text-center ">
-        <h2 className=" text-center text-gray-950 text-2xl font-semibold">
+        <h2 className=" text-center text-gray-50 text-3xl font-semibold">
           Crea tu cuenta
         </h2>
-        <span className=" text-center text-gray-500 ">
+        <span className=" text-center text-sm text-gray-400 mb-2 block ">
           Comienza a compartir tu perfil de desarrollador hoy
         </span>
       </section>
@@ -125,7 +125,7 @@ export default function RegisterView() {
         </div>
         <input
           type="submit"
-          className="bg-gray-950 px-3 mt-5 py-2 uppercase text-white rounded-lg font-bold cursor-pointer"
+          className="bg-gray-950 px-3 mt-5 py-2 uppercase text-white rounded-lg font-medium cursor-pointer"
           value="Crear Cuenta"
         />
         <span className="text-md mt-5 text-gray-700">
