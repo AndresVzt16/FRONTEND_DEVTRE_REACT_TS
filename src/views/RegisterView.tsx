@@ -1,10 +1,13 @@
 import type { RegisterForm } from "../types";
-import ErrorMessage from "../components/ErrorMessage";
-import { Mail, Lock, ArrowRight, User, IdCard, Key } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Mail, User, IdCard, Key } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Input from "../components/ui/Input";
+import axios, { isAxiosError } from "axios";
+import { toast } from "sonner";
 
 export default function RegisterView() {
+
   const initialValues: RegisterForm = {
     name: "",
     email: "",
@@ -16,25 +19,41 @@ export default function RegisterView() {
     handleSubmit,
     watch,
     register,
+    reset,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
   const rules = {
-    name: { ...register("name", { required: "El nombre es obligatorio" }) },
-    email: { ...register("email", { required: "El email es obligatorio" , }) },
-    handle: { ...register("handle", { required: "El handle es obligatorio" }) },
+    name: { required: "El nombre es obligatorio" },
+    email: { required: "El email es obligatorio" },
+    handle: { required: "El handle es obligatorio" },
     password: {
-      ...register("password", { required: "El password es obligatorio", minLength:{value:8, message:'La contraseña debe contener minimo 8 caracteres.'} }),
+      required: "El password es obligatorio",
+      minLength: {
+        value: 8,
+        message: "La contraseña debe contener minimo 8 caracteres.",
+      },
     },
     password_confirmation: {
-      ...register("password_confirmation", {
-        required: "La confirmación de password es obligatoria",
-        validate: (value) =>
-          password === value || "Los passwords no son iguales.",
-      }),
+      required: "La confirmación de password es obligatoria",
+      validate: (value: string) =>
+        password === value || "Los passwords no son iguales.",
     },
   };
-  const handleRegister = (formData: RegisterForm) => {
-    console.log(formData);
+  
+  
+  const handleRegister = async (formData: RegisterForm) => {
+
+    const url = `${import.meta.env.VITE_API_BACKEND_URL}/auth/register`
+    try {
+      const {data} = await axios.post(url,formData)
+      toast.success(data)
+      reset()
+      
+    } catch (error) {
+      if(isAxiosError(error) && error.response){
+        toast.error(error.response.data.error)
+      }
+    }
   };
 
   const password = watch("password");
@@ -51,7 +70,7 @@ export default function RegisterView() {
       </section>
       <form
         onSubmit={handleSubmit(handleRegister)}
-        className="bg-white px-5  w-5/12 mx-auto rounded-lg  py-5 ">
+        className="bg-white px-10 lg:w-5/12  sm:w-10/12 mx-auto rounded-lg flex flex-col shadow-lg  py-10 border border-solid border-gray-200 ">
         <div className="grid grid-cols-1 space-y-3 ">
           <Input
             label="Nombre"
@@ -60,6 +79,8 @@ export default function RegisterView() {
             register={register}
             errors={errors}
             rules={rules.name}
+            Type="text"
+            Placeholder={"Ingresa el nombre"}
           />
           <Input
             label="Email"
@@ -68,14 +89,18 @@ export default function RegisterView() {
             register={register}
             errors={errors}
             rules={rules.email}
+            Type="text"
+            Placeholder={"Ingresa el email"}
           />
           <Input
-            label="Handle"
+            label="Handle / Nick"
             name="handle"
             Icon={IdCard}
             register={register}
             errors={errors}
             rules={rules.handle}
+            Type="text"
+            Placeholder={"Ingresa el nick"}
           />
           <Input
             label="Password"
@@ -84,6 +109,8 @@ export default function RegisterView() {
             register={register}
             errors={errors}
             rules={rules.password}
+            Type="password"
+            Placeholder={"Ingresa el password"}
           />
           <Input
             label="Repetir password"
@@ -92,13 +119,23 @@ export default function RegisterView() {
             register={register}
             errors={errors}
             rules={rules.password_confirmation}
+            Type="password"
+            Placeholder="Repite el password anterior"
           />
         </div>
         <input
           type="submit"
-          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+          className="bg-gray-950 px-3 mt-5 py-2 uppercase text-white rounded-lg font-bold cursor-pointer"
           value="Crear Cuenta"
         />
+        <span className="text-md mt-5 text-gray-700">
+          ¿Ya tienes una cuenta?
+          <Link
+            className="text-blue-800 underline font-semibold ml-2 "
+            to={"/auth/login"}>
+            Iniciar Sesión
+          </Link>
+        </span>
       </form>
     </>
   );

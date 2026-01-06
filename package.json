@@ -17,6 +17,7 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.68.0",
     "react-router-dom": "^7.10.1",
+    "sonner": "^2.0.7",
     "tailwindcss-animated": "^2.0.0"
   },
   "devDependencies": {
