@@ -6,8 +6,8 @@ import {Toaster} from 'sonner'
 export default function AuthLayout() {
   return (
     <>
-      <div className="  min-h-screen bg-gray-950 ">
-        <div className=" mx-auto ">
+      <div className="  min-h-scree ">
+        <div className=" mx-auto  font-family-sans">
           <Header/>
           
           <div className="font-family-sans  mx-auto ">
@@ -16,7 +16,7 @@ export default function AuthLayout() {
         </div>
       </div>
 
-      <Toaster richColors/>
+      <Toaster richColors position="top-right"/>
     </>
   );
 }

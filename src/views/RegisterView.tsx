@@ -2,12 +2,13 @@ import type { RegisterForm } from "../types";
 import { Link } from "react-router-dom";
 import { Mail, User, IdCard, Key } from "lucide-react";
 import { useForm } from "react-hook-form";
+import Divider from "../components/ui/Divider";
 import Input from "../components/ui/Input";
-import axios, { isAxiosError } from "axios";
+import api from "../config/axios";
+import { isAxiosError } from "axios";
 import { toast } from "sonner";
 
 export default function RegisterView() {
-
   const initialValues: RegisterForm = {
     name: "",
     email: "",
@@ -24,7 +25,13 @@ export default function RegisterView() {
   } = useForm({ defaultValues: initialValues });
   const rules = {
     name: { required: "El nombre es obligatorio" },
-    email: { required: "El email es obligatorio" },
+    email: {
+      required: "El email es obligatorio",
+      pattern: {
+        value: /\S+@\S+\.\S+/,
+        message: "E-mail no válido",
+      },
+    },
     handle: { required: "El handle es obligatorio" },
     password: {
       required: "El password es obligatorio",
@@ -39,19 +46,16 @@ export default function RegisterView() {
         password === value || "Los passwords no son iguales.",
     },
   };
-  
-  
-  const handleRegister = async (formData: RegisterForm) => {
 
-    const url = `${import.meta.env.VITE_API_BACKEND_URL}/auth/register`
+  const handleRegister = async (formData: RegisterForm) => {
+    const url = `/auth/register`;
     try {
-      const {data} = await axios.post(url,formData)
-      toast.success(data.message)
-      reset()
-      
+      const { data } = await api.post(url, formData);
+      toast.success(data.message);
+      reset();
     } catch (error) {
-      if(isAxiosError(error) && error.response){
-        toast.error(error.response.data.error)
+      if (isAxiosError(error) && error.response) {
+        toast.error(error.response.data.error);
       }
     }
   };
@@ -60,17 +64,17 @@ export default function RegisterView() {
 
   return (
     <>
-      <section className="text-center ">
-        <h2 className=" text-center text-gray-50 text-3xl font-semibold">
+      <section className="text-center my-10 ">
+        <h2 className=" text-center text-gray-900 text-2xl font-semibold">
           Crea tu cuenta
         </h2>
-        <span className=" text-center text-sm text-gray-400 mb-2 block ">
+        <span className=" text-center text-sm text-gray-500 my-2 block ">
           Comienza a compartir tu perfil de desarrollador hoy
         </span>
       </section>
       <form
         onSubmit={handleSubmit(handleRegister)}
-        className="bg-white px-10 lg:w-5/12  sm:w-10/12 mx-auto rounded-lg flex flex-col shadow-lg  py-10 border border-solid border-gray-200 ">
+        className="bg-white px-10 lg:w-4/12  sm:w-10/12 mx-auto rounded-4xl flex flex-col shadow-lg  py-5 border border-solid border-gray-100 ">
         <div className="grid grid-cols-1 space-y-3 ">
           <Input
             label="Nombre"
@@ -80,7 +84,7 @@ export default function RegisterView() {
             errors={errors}
             rules={rules.name}
             Type="text"
-            Placeholder={"Ingresa el nombre"}
+            Placeholder={"Ingresa tu nombre"}
           />
           <Input
             label="Email"
@@ -90,7 +94,7 @@ export default function RegisterView() {
             errors={errors}
             rules={rules.email}
             Type="text"
-            Placeholder={"Ingresa el email"}
+            Placeholder={"Ingresa tu email"}
           />
           <Input
             label="Handle / Nick"
@@ -100,7 +104,7 @@ export default function RegisterView() {
             errors={errors}
             rules={rules.handle}
             Type="text"
-            Placeholder={"Ingresa el nick"}
+            Placeholder={"Ingresa tu nick"}
           />
           <Input
             label="Password"
@@ -110,7 +114,7 @@ export default function RegisterView() {
             errors={errors}
             rules={rules.password}
             Type="password"
-            Placeholder={"Ingresa el password"}
+            Placeholder={"Ingresa tu password"}
           />
           <Input
             label="Repetir password"
@@ -125,15 +129,16 @@ export default function RegisterView() {
         </div>
         <input
           type="submit"
-          className="bg-gray-950 px-3 mt-5 py-2 uppercase text-white rounded-lg font-medium cursor-pointer"
+          className="bg-blue-600 px-3  my-5 py-2  text-white rounded-lg font-medium cursor-pointer"
           value="Crear Cuenta"
         />
-        <span className="text-md mt-5 text-gray-700">
+        <Divider />
+        <span className="text-center py-3 text-gray-600 ">
           ¿Ya tienes una cuenta?
           <Link
-            className="text-blue-800 underline font-semibold ml-2 "
+            className="text-blue-600  font-semibold ml-2 "
             to={"/auth/login"}>
-            Iniciar Sesión
+            Inicia Sesión
           </Link>
         </span>
       </form>
