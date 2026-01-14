@@ -1,5 +1,5 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "../widgets/ErrorMessage";
 import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
 

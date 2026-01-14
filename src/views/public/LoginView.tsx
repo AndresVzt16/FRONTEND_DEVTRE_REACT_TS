@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Divider from "../components/ui/Divider";
+import Divider from "../../components/ui/Divider";
 import { useForm } from "react-hook-form";
 import { Mail, User, IdCard, Key } from "lucide-react";
-import Input from "../components/ui/Input";
+import Input from "../../components/ui/Input";
 import { isAxiosError } from "axios";
-import type { LoginForm } from "../types";
-import api from "../config/axios";
+import type { LoginForm } from "../../types";
+import api from "../../config/axios";
 import { toast } from "sonner";
 export default function LoginView() {
   const initialValues: LoginForm = {
@@ -30,7 +30,9 @@ export default function LoginView() {
     try {
       const {data} = await api.post("/auth/login", formData);
       /* console.log(response); */
-      toast.success(data.message);
+      
+      localStorage.setItem('AUTH_TOKEN',data)
+
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         console.log(error.response)
@@ -72,13 +74,13 @@ export default function LoginView() {
           Icon={Key}
         />
         <section className="w-full flex justify-end">
-          <span className="text-sm  mt-5 text-end text-blue-600 font-medium ">
+          <span className="text-sm  my-3 text-end text-blue-600 font-medium ">
             He olvidado mi contraseña
           </span>
         </section>
         <input
           type="submit"
-          className="bg-blue-600 px-3  my-5 py-2  text-white rounded-lg font-medium cursor-pointer"
+          className="bg-blue-600 px-3  my-2 py-2  text-white rounded-lg font-medium cursor-pointer"
           value="Crear Cuenta"
         />
         <Divider/>

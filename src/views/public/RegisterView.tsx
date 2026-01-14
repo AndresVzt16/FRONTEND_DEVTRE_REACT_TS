@@ -1,10 +1,10 @@
-import type { RegisterForm } from "../types";
+import type { RegisterForm } from "../../types";
 import { Link } from "react-router-dom";
 import { Mail, User, IdCard, Key } from "lucide-react";
 import { useForm } from "react-hook-form";
-import Divider from "../components/ui/Divider";
-import Input from "../components/ui/Input";
-import api from "../config/axios";
+import Divider from "../../components/ui/Divider";
+import Input from "../../components/ui/Input";
+import api from "../../config/axios";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
 
