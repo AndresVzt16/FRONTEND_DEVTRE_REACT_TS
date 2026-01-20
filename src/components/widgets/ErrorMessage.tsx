@@ -1,4 +1,4 @@
-import { BadgeX, ShieldX} from "lucide-react";
+import { ShieldX } from "lucide-react";
 const ErrorMessage = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
