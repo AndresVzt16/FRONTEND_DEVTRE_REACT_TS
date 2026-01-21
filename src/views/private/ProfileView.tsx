@@ -1,23 +1,38 @@
 import { useForm } from "react-hook-form";
 import Input from "../../components/ui/Input";
-import { IdCard } from "lucide-react";
+import TextArea from "../../components/ui/TextArea";
+import { IdCard, InfoIcon } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import type { TUser, ProfileForm } from "../../types";
 export default function ProfileView() {
-  const initialValues = {
-    handle: "",
-    description: "",
-    image: "",
+  const queryClient = useQueryClient();
+  const data: TUser = queryClient.getQueryData(["user"])!;
+
+
+  const defaultValues = {
+    handle: data.handle,
+    description: data.description,
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: {} });
+  } = useForm({ defaultValues });
+
+  const handleUserProfileFormSubmit = (formData: ProfileForm) => {
+    console.log(formData);
+  };
+
+
   const rules = {
     handle: { required: "El nombre de usuario es obligatorio" },
   };
 
   return (
-    <form className="bg-white p-10 rounded-lg space-y-5" onSubmit={() => {}}>
+    <form
+      className="bg-white p-10 rounded-lg space-y-5"
+      onSubmit={handleSubmit(handleUserProfileFormSubmit)}>
       <legend className="text-2xl text-slate-800 text-center">
         Editar Información
       </legend>
@@ -34,10 +49,13 @@ export default function ProfileView() {
       </div>
 
       <div className="grid grid-cols-1 gap-2">
-        <label htmlFor="description">Descripción:</label>
-        <textarea
-          className="border-none bg-slate-100 rounded-lg p-2"
-          placeholder="Tu Descripción"
+        <TextArea
+          Type="text"
+          errors={errors}
+          label="Descripcion"
+          name="description"
+          register={register}
+          Icon={InfoIcon}
         />
       </div>
 

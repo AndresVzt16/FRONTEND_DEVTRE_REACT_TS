@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Divider from "../../components/ui/Divider";
 import { useForm } from "react-hook-form";
 import { Mail, User, IdCard, Key } from "lucide-react";
@@ -12,6 +12,8 @@ export default function LoginView() {
     email: "",
     password: "",
   };
+
+/*   localStorage.removeItem('AUTH_TOKEN') */
   const {
     handleSubmit,
     register,
@@ -26,12 +28,14 @@ export default function LoginView() {
                 },},
     password: { required: "El password es obligatorio." },
   };
+  const navigate = useNavigate()
   const handleLogin = async (formData: LoginForm) => {
     try {
       const {data} = await api.post("/auth/login", formData);
       /* console.log(response); */
       
       localStorage.setItem('AUTH_TOKEN',data)
+      navigate('/admin')
 
     } catch (error) {
       if (isAxiosError(error) && error.response) {

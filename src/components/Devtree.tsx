@@ -1,14 +1,15 @@
-import type { User } from "../types";
+import type { TUser } from "../types";
 import NavigationTabs from "./Navigation";
+import { User, SquareActivity } from "lucide-react";
 import Header from "./header/Header";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 
 type DevTreeProps = {
-  data: User;
+  data: TUser;
 };
 
-const Devtree = ({ data }: DevTreeProps)     => {
+const Devtree = ({ data }: DevTreeProps) => {
   return (
     <>
       <Header />
@@ -17,7 +18,10 @@ const Devtree = ({ data }: DevTreeProps)     => {
         <main className="px-10">
           <div className="flex flex-col md:flex-row gap-10">
             <div className="flex-1 ">
-            <p>Visitar mi perfil {data.name}</p>
+              <section className=" flex items-center gap-2 mt-2">
+                <SquareActivity className=" size-5 text-lime-500"/>
+                <p>Panel de control</p>
+              </section>
               <Outlet />
             </div>
             <div className="w-full md:w-96 bg-slate-800 px-5 py-10 space-y-6"></div>

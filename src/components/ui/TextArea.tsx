@@ -7,7 +7,7 @@ type InputProps = {
   label: string;
   name: string;
   register: UseFormRegister<any>;
-  rules: object;
+  rules?: object;
   errors: FieldErrors;
   options?: Object;
   Icon?: LucideIcon;
@@ -15,7 +15,7 @@ type InputProps = {
   Placeholder?: string;
 };
 
-const Input = ({
+const TextArea = ({
   label,
   name,
   register,
@@ -53,4 +53,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default TextArea;
