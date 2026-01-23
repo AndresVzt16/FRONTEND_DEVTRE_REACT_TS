@@ -19,7 +19,7 @@ const Devtree = ({ data }: DevTreeProps) => {
           <div className="flex flex-col md:flex-row gap-10">
             <div className="flex-1 ">
               <section className=" flex items-center gap-2 mt-2">
-                <SquareActivity className=" size-5 text-lime-500"/>
+                <SquareActivity className=" size-5 text-lime-700"/>
                 <p>Panel de control</p>
               </section>
               <Outlet />

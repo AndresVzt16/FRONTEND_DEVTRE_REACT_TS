@@ -5,7 +5,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import AppLayout from "./layouts/AppLayout";
 import LinkTreeView from "./views/private/LinkTreeView";
 import ProfileView from "./views/private/ProfileView";
-import AccountConfirm from "./views/public/AccountConfirm";
+import AccountConfirm from "./views/public/AccountConfirm/AccountConfirm";
 export default function Router() {
   return (
     <BrowserRouter>

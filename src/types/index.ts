@@ -4,6 +4,7 @@ export type TUser = {
   name: string;
   email: string;
   description: string
+  token:string
 };
 
 export type RegisterForm = Pick<TUser, "handle" | "email" | "name"> & {

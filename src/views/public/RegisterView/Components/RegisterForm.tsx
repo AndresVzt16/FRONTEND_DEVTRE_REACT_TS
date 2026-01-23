@@ -1,14 +1,14 @@
-import type { RegisterForm } from "../../types";
+import type { RegisterForm } from "../../../../types";
 import { Link } from "react-router-dom";
 import { Mail, User, IdCard, Key } from "lucide-react";
 import { useForm } from "react-hook-form";
-import Divider from "../../components/ui/Divider";
-import Input from "../../components/ui/Input";
-import api from "../../config/axios";
+import Divider from "../../../../components/ui/Divider";
+import Input from "../../../../components/ui/Input";
+import api from "../../../../config/axios";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
 
-export default function RegisterView() {
+export default function FormRegister() {
   const initialValues: RegisterForm = {
     name: "",
     email: "",
@@ -64,14 +64,7 @@ export default function RegisterView() {
 
   return (
     <>
-      <section className="text-center my-10 ">
-        <h2 className=" text-center text-gray-900 text-2xl font-semibold">
-          Crea tu cuenta
-        </h2>
-        <span className=" text-center text-sm text-gray-500 my-2 block ">
-          Comienza a compartir tu perfil de desarrollador hoy
-        </span>
-      </section>
+      
       <form
         onSubmit={handleSubmit(handleRegister)}
         className="bg-white px-10 lg:w-4/12  sm:w-10/12 mx-auto rounded-4xl flex flex-col shadow-lg  py-5 border border-solid border-gray-100 ">
