@@ -1,22 +1,28 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Mail, Key } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 import Input from "../../../../components/ui/Input";
-import api from "../../../../config/axios";
-import { isAxiosError } from "axios";
-import { toast } from "sonner";
 import Divider from "../../../../components/ui/Divider";
 import type { LoginForm } from "../../../../types";
+import { useMutation } from "@tanstack/react-query";
+import { authenticateUser } from "../../../../services/Services";
+import { toast } from "sonner";
+import Button from "../../../../components/ui/Button";
 const FormLogin = () => {
+  const navigate = useNavigate();
   const initialValues: LoginForm = {
     email: "",
     password: "",
   };
+
   const {
     handleSubmit,
     formState: { errors },
     register,
-  } = useForm({defaultValues:initialValues});
+  } = useForm({ defaultValues: initialValues });
+
   const rules = {
     email: {
       required: "El email es obligatorio.",
@@ -27,19 +33,20 @@ const FormLogin = () => {
     },
     password: { required: "El password es obligatorio." },
   };
+
+  const loginMutation = useMutation({
+    mutationKey: ["Login"],
+    mutationFn: (formData: LoginForm) => authenticateUser(formData),
+    onSuccess: () => navigate("/admin"),
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  const { mutate, status } = loginMutation;
+
   const handleLogin = async (formData: LoginForm) => {
-    try {
-      const { data } = await api.post("/auth/login", formData);
-      /* console.log(response); */
-      const navigate = useNavigate();
-      localStorage.setItem("AUTH_TOKEN", data);
-      navigate("/admin");
-    } catch (error) {
-      if (isAxiosError(error) && error.response) {
-        console.log(error.response);
-        toast.error(error.response.data.error);
-      }
-    }
+    mutate(formData);
   };
 
   return (
@@ -53,7 +60,7 @@ const FormLogin = () => {
           name="email"
           register={register}
           errors={errors}
-          Type="text"
+          Type="email"
           rules={rules.email}
           Icon={Mail}
         />
@@ -72,10 +79,10 @@ const FormLogin = () => {
             He olvidado mi contraseña
           </span>
         </section>
-        <input
+        <Button
+          text="Iniciar Sesion"
+          loading={status === "pending" ? true : false}
           type="submit"
-          className="bg-blue-600 px-3  my-2 py-2  text-white rounded-lg font-medium cursor-pointer"
-          value="Crear Cuenta"
         />
         <Divider />
         <section className="mx-auto w-fit">

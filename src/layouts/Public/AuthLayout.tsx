@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Header from "../components/header/Header";
+import Header from "../../components/header/Header";
 import {Toaster} from 'sonner'
 
 
@@ -8,7 +8,7 @@ export default function AuthLayout() {
     <>
       <div className="  min-h-scree ">
         <div className=" mx-auto  font-family-sans">
-          <Header/>
+          <Header />
           
           <div className="font-family-sans  mx-auto ">
             <Outlet />

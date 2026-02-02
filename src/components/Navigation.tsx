@@ -1,9 +1,9 @@
-import { BookMarked, User } from "lucide-react";
+import { BookMarked, User, LinkIcon } from "lucide-react";
 import type React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 const tabs = [
-  { name: "Links", href: "/admin", icon: BookMarked },
   { name: "Mi Perfil", href: "/admin/profile", icon: User },
+  { name: "Links", href: "/admin", icon: LinkIcon },
 ];
 
 function classNames(...classes: string[]) {
@@ -19,7 +19,7 @@ export default function NavigationTabs() {
   };
 
   return (
-    <div className="">
+    <div className="bg-white rounded-t-2xl border-t border-l border-r border-gray-200">
       <div className="sm:hidden">
         <label htmlFor="tabs" className="sr-only">
           Select a tab
@@ -37,29 +37,29 @@ export default function NavigationTabs() {
         </select>
       </div>
 
-      <div className="hidden sm:block px-10">
+      <div className="hidden sm:block ">
         <div className="border-blue-100">
-          <nav className="-mb-px flex space-x-2" aria-label="Tabs">
+          <nav className="-mb-px flex" aria-label="Tabs">
             {tabs.map((tab) => (
               <Link
                 key={tab.name}
                 to={tab.href}
                 className={classNames(
                   location.pathname === tab.href
-                    ? "border-blue-500 text-blue-500"
+                    ? "border-blue-500 text-blue-500 "
                     : "border-transparent text-gray-500 transition-all hover:border-gray-300 hover:text-gray-700",
-                  "group inline-flex items-center border-b-2 py-4 px-1 text-xl"
+                  "group inline-flex font-semibold items-center border-b-2 py-4 px-6 text-sm"
                 )}>
                 <tab.icon
                   className={classNames(
                     location.pathname === tab.href
                       ? "text-blue-500"
-                      : "text-gray-400 group-hover:text-gray-500",
+                      : "text-gray-500 group-hover:text-gray-500",
                     "-ml-0.5 mr-2 size-4 transition-all"
                   )}
                   aria-hidden="true"
                 />
-                <span className="text-sm">{tab.name}</span>
+                <span className=" text-center">{tab.name}</span>
               </Link>
             ))}
           </nav>

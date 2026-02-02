@@ -1,6 +1,7 @@
 import type { RegisterForm } from "../../../../types";
 import { Link } from "react-router-dom";
 import { Mail, User, IdCard, Key } from "lucide-react";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useForm } from "react-hook-form";
 import Divider from "../../../../components/ui/Divider";
 import Input from "../../../../components/ui/Input";
@@ -64,7 +65,6 @@ export default function FormRegister() {
 
   return (
     <>
-      
       <form
         onSubmit={handleSubmit(handleRegister)}
         className="bg-white px-10 lg:w-4/12  sm:w-10/12 mx-auto rounded-4xl flex flex-col shadow-lg  py-5 border border-solid border-gray-100 ">
@@ -122,9 +122,9 @@ export default function FormRegister() {
         </div>
         <input
           type="submit"
-          className="bg-blue-600 px-3  my-5 py-2  text-white rounded-lg font-medium cursor-pointer"
-          value="Crear Cuenta"
-        />
+          className="bg-blue-600 px-3  my-5 py-2  text-white rounded-lg font-medium cursor-pointer">
+          Cerar Cuenta
+        </input>
         <Divider />
         <span className="text-center py-3 text-gray-600 ">
           ¿Ya tienes una cuenta?

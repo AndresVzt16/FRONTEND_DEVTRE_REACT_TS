@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUser } from "../services/Services";
+import { getUser } from "../../services/Services";
 import { Navigate } from "react-router-dom";
-import Devtree from "../components/Devtree";
+import AppLayout from "./AppLayout";
 
-export default function AppLayout() {
+export default function PrivateLayout() {
   const { data, isLoading, isError } = useQuery({
     queryFn: getUser,
     queryKey: ["user"],
@@ -12,8 +12,8 @@ export default function AppLayout() {
   });
 
   if (isLoading) return <p>...Cargando</p>;
-  if (isError) return <Navigate to="/auth/login" />;
-  if (data) return <Devtree data={data} />;
+  if (isError) return <Navigate to="/login" />;
+  if (data) return <AppLayout data={data} />;
   
   return null;
 }

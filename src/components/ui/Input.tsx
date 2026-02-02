@@ -13,6 +13,7 @@ type InputProps = {
   Icon?: LucideIcon;
   Type: string;
   Placeholder?: string;
+  /* density?: */
 };
 
 const Input = ({
@@ -33,7 +34,7 @@ const Input = ({
       </label>
       {Icon && (
         <Icon
-          className={`size-5 text-gray-400 mt-6 ml-3 absolute`}
+          className={`size-5 text-gray-300 mt-6 ml-3 absolute`}
         />
       )}
 
