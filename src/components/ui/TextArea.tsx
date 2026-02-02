@@ -13,10 +13,9 @@ type InputProps = {
   Icon?: LucideIcon;
   Type: string;
   Placeholder?: string;
-  /* density?: */
 };
 
-const Input = ({
+const TextArea = ({
   label,
   name,
   register,
@@ -34,17 +33,15 @@ const Input = ({
       </label>
       {Icon && (
         <Icon
-          className={`size-5 text-gray-300 mt-6 ml-3 absolute`}
+          className={`size-5 text-gray-400 mt-6 ml-3 absolute`}
         />
       )}
 
-      <input
+      <textarea
         id={name}
         className="w-full rounded-xl text-sm border  border-gray-300 px-10 mt-1 py-5
          focus:outline-none focus:border focus:border-solid focus:border-blue-300 focus:transition-all
          transition"
-        type={Type}
-  
         placeholder={Placeholder}
         {...register(`${name}`, rules)}
       />
@@ -56,4 +53,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default TextArea;
