@@ -22,6 +22,7 @@ const ProfileLinks = ({ data }: propsProfile) => {
           <p className="text-gray-700 text-sm text-center">
             {data.description}
           </p>
+        
         </section>
 
         <section className=" flex justify-center gap-5">

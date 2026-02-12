@@ -2,8 +2,8 @@ import { BookMarked, User, LinkIcon } from "lucide-react";
 import type React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 const tabs = [
-  { name: "Mi Perfil", href: "/admin/profile", icon: User },
-  { name: "Links", href: "/admin", icon: LinkIcon },
+  { name: "Mi Perfil", href: "/admin", icon: User },
+  { name: "Links", href: "/admin/links", icon: LinkIcon },
 ];
 
 function classNames(...classes: string[]) {

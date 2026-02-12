@@ -31,7 +31,8 @@ const FormLogin = () => {
         message: "E-mail no válido",
       },
     },
-    password: { required: "El password es obligatorio." },
+    password: { required: "El password es obligatorio.",
+     },
   };
 
   const loginMutation = useMutation({

@@ -9,7 +9,7 @@ export default function ProfileView() {
   const profileUpdateMutation = useMutation({
     retry: 0,
     mutationKey: ["PROFILE_UPDATE"],
-    mutationFn: (data: ProfileForm) => updateProfile(data),
+    mutationFn: updateProfile,
 
     onSuccess: (data) => {
       toast.success(data.message);
@@ -44,8 +44,12 @@ export default function ProfileView() {
   };
 
   const hanldeUpdateProfile = async (dataForm: ProfileForm) => {
+    const user:TUser = queryClient.getQueryData(['user'])!
+    user.description = dataForm.description
+    user.handle = dataForm.handle
+    user.name = dataForm.name
     /* console.log(data) */
-    profileUpdateMutation.mutate(dataForm);
+    profileUpdateMutation.mutate(user);
   };
   return (
     <>

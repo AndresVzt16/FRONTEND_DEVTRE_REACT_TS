@@ -16,8 +16,8 @@ export default function Router() {
           <Route path="/confirm-account/:token" element={<AccountConfirm />} />
         </Route>
         <Route path="/admin" element={<PrivateLayout />}>
-          <Route index={true} element={<LinkTreeView />} />
-          <Route path="profile" element={<ProfileView />} />
+          <Route index={true} element={<ProfileView />} />
+          <Route path="links"  element={<LinkTreeView />} />
         </Route>
       </Routes>
     </BrowserRouter>
