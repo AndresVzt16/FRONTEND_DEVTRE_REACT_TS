@@ -156,6 +156,7 @@ export default function ProfileForms({
           Icon={User}
         /> */}
         <Input
+      
           Type="text"
           label="Handle/nick"
           name="handle"
@@ -165,6 +166,7 @@ export default function ProfileForms({
           Icon={IdCard}
         />
         <Input
+        
           Type="text"
           label="Nombre"
           name="name"

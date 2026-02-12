@@ -13,6 +13,9 @@ type InputProps = {
   Icon?: LucideIcon;
   Type: string;
   Placeholder?: string;
+  OnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+
   /* density?: */
 };
 
@@ -25,8 +28,10 @@ const Input = ({
   Icon,
   Type,
   Placeholder,
+  OnChange
 }: InputProps) => {
 
+  const registered = register(name, rules)
   return (
     <div className=" w-full my-2">
       <label className=" inline-block w-full text-gray-700 text-sm font-semibold">
@@ -37,16 +42,19 @@ const Input = ({
           className={`size-5 text-gray-300 mt-6 ml-3 absolute`}
         />
       )}
-
+      
       <input
         id={name}
         className="w-full rounded-xl text-sm border  border-gray-300 px-10 mt-1 py-5
          focus:outline-none focus:border focus:border-solid focus:border-blue-300 focus:transition-all
          transition"
         type={Type}
-  
         placeholder={Placeholder}
-        {...register(`${name}`, rules)}
+        {...registered}
+        onChange={(e) => {
+          registered.onChange(e)
+          OnChange?.(e)
+        }}
       />
 
       {errors[`${name}`] && (

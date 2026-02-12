@@ -36,7 +36,7 @@ export async function activateAccout(token: string) {
   }
 }
 
-export async function updateProfile(ProfileData: ProfileForm) {
+export async function updateProfile(ProfileData: TUser) {
   try {
     console.log(ProfileData);
     const { data } = await api.patch("/user", ProfileData);
