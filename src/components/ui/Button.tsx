@@ -1,53 +1,50 @@
 import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
 import type { LucideIcon } from "lucide-react";
+import type { IconType } from "react-icons";
+
 type ButtonProps = {
-  loading?: boolean; // opcional
-  text: string; // string minúscula
-  type?: "button" | "submit" | "reset"; // opcional, para pasar type al botón
-  Icon?: LucideIcon;
+  loading?: boolean;
+  text?: string;
+  type?: "button" | "submit" | "reset";
+  Icon?: LucideIcon | IconType;
   fn?: () => void;
-  priority?:'primary'|'secondary'|'tertiary'
+  
+  variant?: "text" | "outlined" | "contained";
 };
 
-type stylePriority = {
-  primary:string
-  secondary:string
-  tertiary:string
-}
 
-const Button = ({
+
+const ButtonUI = ({
   loading = false,
   text,
   type,
   Icon,
   fn,
-  priority
+  
+  variant = "contained",
 }: ButtonProps) => {
-
-  const handlePriority = (priority: keyof stylePriority) => {
-    const resultStyle: stylePriority = {
-      'primary':'text-white bg-blue-700',
-      'secondary':'text-gray-800 bg-white border border-gray-200',
-      'tertiary':'text-underline text-blue-700'
-    }
-    if(resultStyle[priority]){
-      return resultStyle[priority];
-    }
-    return resultStyle.primary
-
-  }
   return (
-    <button
+    <Button
       type={type}
+      variant={variant}
       onClick={fn}
-      className={`${handlePriority(priority || 'primary')}
-          px-5 my-2 py-3   rounded-lg font-medium cursor-pointer flex justify-center items-center gap-2`
-      }
-      disabled={loading}>
-      {Icon && <Icon className={`size-5 ${priority == "primary"? 'text-white' :'text-gray-300'}`} />}
-      {loading ? <CircularProgress size={24} color="inherit" /> : text}
-    </button>
+      disableElevation
+      disabled={loading}
+      startIcon={Icon ? <Icon size={18} /> : null}
+      
+      sx={{
+        borderRadius: "6px",
+        fontFamily: "Inter, sans-serif",
+        fontSize: "14px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {loading ? <CircularProgress size={20} /> : text}
+    </Button>
   );
 };
 
-export default Button;
+export default ButtonUI;

@@ -10,6 +10,7 @@ export type TUser = {
   updatedAt: string;
   imageId:string;
   links:string
+  tags:string
 };
 
 export type RegisterForm = Pick<TUser, "handle" | "email" | "name"> & {
@@ -21,6 +22,10 @@ export type LoginForm = Pick<TUser, "email"> & {
   password: string;
 };
 
+export type TagSkill = {
+  name:string,
+  icon:string
+}
 export type ProfileForm = Pick<TUser, "handle" | "description" | 'name'>;
 
 export type SocialNetwork = {

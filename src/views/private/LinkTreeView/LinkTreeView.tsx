@@ -35,18 +35,19 @@ const LinkTreeView = () => {
       }
       return item;
     });
-    console.log(updatedData);
+    
     setDevTreeLinks(updatedData);
-    console.log(devTreeLinks);
-    console.log(JSON.parse(user.links));
   }, []);
   const hanldeUpdateProfile = () => {
     mutate(user);
   };
+
+  
   return (
-    <div className="px-10 bg-white border border-gray-200 mx-auto">
+    <div className=" flex flex-col  gap-5 pt-5  border-gray-200 mx-auto">
       {devTreeLinks.map((item) => (
         <DevTreeInput
+
           item={item}
           key={item.name}
           setDevTreeLinks={setDevTreeLinks}

@@ -4,8 +4,8 @@ import FormRegister from "./Components/RegisterForm";
 export default function RegisterView() {
   
   return (
-    <>
-      <section className="text-center my-10 ">
+    <div className=" w-full py-5">
+      <section className="text-center ">
         <h2 className=" text-center text-gray-900 text-2xl font-semibold">
           Crea tu cuenta
         </h2>
@@ -14,6 +14,6 @@ export default function RegisterView() {
         </span>
       </section>
       <FormRegister/>
-    </>
+    </div>
   );
 }

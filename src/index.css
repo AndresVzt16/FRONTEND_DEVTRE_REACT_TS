@@ -14,5 +14,12 @@
   --color-avocado-700: oklch(0.36 0.10 116.96);
   --color-avocado-800: oklch(0.23 0.08 116.19);
   --color-avocado-900: oklch(0.14 0.06 115.45);
+
+
+/* Colores Primarios */
+
+  --color-primary-blue:#3B82F6;
+  --color-primary-cyan:#06B6D4;
+  --color-primary-teal:#14B8A6;
+
 }
-@plugin "@tailwindcss/forms";

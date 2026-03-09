@@ -1,19 +1,22 @@
 import React, { useEffect } from "react";
 import SwitchUI from "../../../../components/ui/Switch";
+import IconButton from "@mui/material/IconButton";
 import { useQueryClient } from "@tanstack/react-query";
 import type { DevtreeLink, TUser } from "../../../../types";
+import { FaTiktok } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
+import { FaXTwitter } from "react-icons/fa6";
 import {
-  Facebook,
-  Github,
-  Instagram,
-  Linkedin,
-  Twitch,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+  FiGithub,
+  FiInstagram,
+  FiTwitch,
+  FiFacebook,
+  FiYoutube,
+  FiLinkedin,
+} from "react-icons/fi";
+import type { IconType } from "react-icons";
 import Input from "../../../../components/ui/Input";
 import { useForm } from "react-hook-form";
-import type { LucideIcon } from "lucide-react";
 import { isValidUrl } from "../../../../utils";
 import { toast } from "sonner";
 type DevtreInputProps = {
@@ -29,10 +32,6 @@ const DevTreeInput = ({
 }: DevtreInputProps) => {
   const queryClient = useQueryClient();
 
-  const defaultValues = {
-    [item.name]: item.url ?? "",
-  };
-
   const {
     register,
     reset,
@@ -45,22 +44,27 @@ const DevTreeInput = ({
 
   const key = item.name.toLowerCase().trim();
 
-  const icons: Record<string, LucideIcon | undefined> = {
-    facebook: Facebook,
-    tiktok: undefined,
-    x: Twitter,
-    instagram: Instagram,
-    github: Github,
-    youtube: Youtube,
-    twitch: Twitch,
-    linkedin: Linkedin,
+  const icons: Record<string, IconType | undefined> = {
+    facebook: FiFacebook,
+    tiktok: FaTiktok,
+    x: FaXTwitter,
+    instagram: FiInstagram,
+    github: FiGithub,
+    youtube: FiYoutube,
+    twitch: FiTwitch,
+    linkedin: FiLinkedin,
   };
+
 
   const rules = {
     socialGenericRule: { required: "este campo no puede estar Vacio" },
   };
 
-  const handleChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const IconComponent = icons[key];
+
+  const handleChangeUrl = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const updateLinks = DevtreeLinks.map((link) =>
       link.name === e.target.name
         ? { ...link, url: e.target.value, enabled: false }
@@ -98,13 +102,14 @@ const DevTreeInput = ({
   }, [item.url, item.name, reset]);
 
   return (
-    <div className="md:flex items-end md:mx-auto gap-5">
-      <p className="text-gray-400">{item.enabled}</p>
+    <div className=" bg-white shadow flex justify-evenly items-center w-full  border rounded-2xl border-gray-200  p-5 gap-5 ">
+      <section>
+        <div className=" bg-neutral-900 p-2  rounded-lg flex items-center justify-center  ">
+          {IconComponent && <IconComponent className="size-5 text-gray-100" />}
+        </div>
+      </section>
+      <div className=" md:w-full font-family-sans  flex flex-wrap ">
 
-      <div
-        className="bg-cover size-12 md:mb-5 "
-        style={{ backgroundImage: `url(/social/icon_${item.name}.svg)` }}></div>
-      <div className=" md:w-7/12">
         <Input
           label={item.name}
           errors={errors}
@@ -114,10 +119,16 @@ const DevTreeInput = ({
           rules={rules.socialGenericRule}
           Icon={icons[key]}
           OnChange={handleChangeUrl}
+          Size="medium"
         />
       </div>
-      <div className=" mb-6">
+      <div className="flex items-center ">
         <SwitchUI enabled={item.enabled} fn={handleEnableLink} item={item} />
+      </div>
+      <div className=" flex items-center ">
+        <IconButton sx={{ p: "12px" }} color="error">
+          <AiOutlineDelete className=" size-5" />
+        </IconButton>
       </div>
     </div>
   );

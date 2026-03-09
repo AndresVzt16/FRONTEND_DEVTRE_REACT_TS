@@ -1,37 +1,79 @@
+import { useEffect, useState } from "react";
 import type { TUser } from "../../../../types";
 import { Calendar, Image } from "lucide-react";
+import type { SocialNetwork } from "../../../../types";
+import CardLink from "./CardLink";
+import TagInformation from "./TagInformation";
+import { AiOutlineUser } from "react-icons/ai";
+import Divider from "@mui/material/Divider";
 interface propsProfile {
   data: TUser;
 }
 
 const ProfileLinks = ({ data }: propsProfile) => {
+  const [links, setLinks] = useState(
+    JSON.parse(data.links).filter((link: SocialNetwork) => link.enabled),
+  );
+  const [date, setDate] = useState(new Date(data.createdAt));
+  const [modificationDate, setModificationDate] = useState(
+    new Date(data.updatedAt),
+  );
+
+  useEffect(() => {
+    setLinks(JSON.parse(data.links).filter((link: SocialNetwork) => link.enabled))
+  },[data])
   return (
     <>
-      <article className=" bg-white border rounded-2xl border-gray-200  px-5 py-5">
-        {data.image ?<img
-          src={`${data.image}?t=${Date.now()}`}
-          alt=""
-          className="size-44 object-cover mb-5 rounded-full mx-auto"
-        />:<Image className=" text-gray-300 mx-auto size-44"/>}
-
-        <section className=" flex flex-col gap-1">
-          <h2 className="text-gray-900 text-xl text-center font-medium">
-            {data.name}
-          </h2>
-          <p className="text-green-500 text-sm text-center">@{data.handle}</p>
-          <p className="text-gray-700 text-sm text-center">
+      <article className="  py-5  ">
+        <section className=" flex items-center gap-2">
+          {data.image ? (
+            <img
+              src={`${data.image}?t=${Date.now()}`}
+              alt=""
+              className="size-10 object-cover  rounded-full "
+            />
+          ) : (
+            <Image className=" text-gray-300 size-10" />
+          )}
+          <section className=" space-y-1.5">
+            <h2 className="text-gray-900  text-center text-sm font-semibold">
+              {data.name}
+            </h2>
+            <p className="text-green-500 text-xs ">@{data.handle}</p>
+            {/* <p className="text-gray-700 text-sm text-center ">
             {data.description}
-          </p>
-        
+          </p> */}
+          </section>
         </section>
 
-        <section className=" flex justify-center gap-5">
-          <article className="flex items-center justify-center gap-2">
-            <Calendar className=" size-3 text-gray-600" />
-            <p className="text-sm text-gray-600">
-              Desde <span>{new Date(data.createdAt).getFullYear()}</span>
-            </p>
-          </article>
+        <section className="flex flex-wrap  gap-2.5 my-10  ">
+          <h2 className=" text-sm font-semibold text-neutral-700">
+            Datos Informativos
+          </h2>
+          <TagInformation
+            Label={"Miembro desde"}
+            color={"bg-gray-50"}
+            value={date.getFullYear()}
+            Icon={AiOutlineUser}
+          />
+
+          <TagInformation
+            Label={"Ultima actualizacion"}
+            color="bg-gray-50"
+            value={modificationDate.getFullYear()}
+            Icon={Calendar}
+          />
+        </section>
+        <Divider />
+
+        <section className=" grid grid-cols-1 gap-2.5 my-5">
+          <h2 className=" text-sm font-semibold text-neutral-800">
+            Enlaces disponibles
+          </h2>
+          {links.map((link: SocialNetwork) => (
+            <CardLink data={link} key={link.name}  />
+          ))}
+          <p></p>
         </section>
       </article>
     </>

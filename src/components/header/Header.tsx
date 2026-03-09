@@ -1,26 +1,47 @@
+import { Code2, Bell, Settings } from "lucide-react";
+import IconButtonUI from "../ui/IconButtonUI";
+import { ImageWithFallback } from "../ui/ImageWithFallback";
+import MenuUI from "./Menu";
 import type { TUser } from "../../types";
-import Menu from "./Menu";
-
-interface Props {
+import NavigationTabs from "../Navigation";
+interface HeaderProps {
   user?: TUser;
 }
 
-const Header = ({ user }: Props) => {
+export function Header({ user }: HeaderProps) {
   return (
-    <nav className="bg-slate-900 w-full flex py-1 px-10 justify-between items-center">
-      <section className="flex items-center gap-2 py-2">
-        <img src="/logo.svg" className="w-12" alt="logo Devtree" />
-        <p className="text-3xl text-lime-50 font-medium">
-          Dev<span className="font-bold text-blue-500">Tree</span>
-        </p>
-      </section>
-      <section>
-        {user && <Menu userData={user} />}
-        {/* aquí ya puedes usar user si quieres */}
-        {/* {user.name} */}
-      </section>
-    </nav>
-  );
-};
+    <header className="bg-white-50 border-b border-gray-200 ">
+      <div className=" px-5  mx-auto ">
+        <div className="lg:flex items-center md:justify-between  min-h-14  ">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <Code2 className="w-8 h-8 text-blue-600" />
+              <span className="text-xl font-bold">
+                <span className="text-green-600">Dev</span>
+                <span className="text-sky-500">Tree</span>
+              </span>
+            </div>
+          </div>
+          <div className=" flex justify-between">
+            {user && <NavigationTabs />}
 
-export default Header;
+            {/* User Menu */}
+            {user && (
+              <div className="flex items-center gap-4">
+                <div className="text-slate-400">
+                  <IconButtonUI Icon={Bell} Color="inherit" />
+                </div>
+                <div className="text-slate-400">
+                  <IconButtonUI Icon={Settings} Color="inherit" />
+                </div>
+
+                <MenuUI userData={user} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
