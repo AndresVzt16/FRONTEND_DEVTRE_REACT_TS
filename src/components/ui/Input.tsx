@@ -1,25 +1,31 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import ErrorMessage from "../widgets/ErrorMessage";
-import type { LucideIcon } from "lucide-react";
-import { useState } from "react";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import type { IconType } from "react-icons";
 
 type InputProps = {
-  label: string;
+  label?: string;
   name: string;
   register: UseFormRegister<any>;
   rules?: object;
   errors: FieldErrors;
   options?: Object;
-  Icon?: LucideIcon;
+  Icon?: IconType;
   Type: string;
+  Size?: "small" | "medium";
   Placeholder?: string;
-  OnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-
+  disabled?: true | false;
+  OnChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 
   /* density?: */
 };
 
 const Input = ({
+  disabled,
   label,
   name,
   register,
@@ -27,36 +33,48 @@ const Input = ({
   errors,
   Icon,
   Type,
+  Size,
   Placeholder,
-  OnChange
+  OnChange,
 }: InputProps) => {
-
-  const registered = register(name, rules)
+  const registered = register(name, rules);
   return (
-    <div className=" w-full my-2">
-      <label className=" inline-block w-full text-gray-700 text-sm font-semibold">
-        {label}
-      </label>
-      {Icon && (
-        <Icon
-          className={`size-5 text-gray-300 mt-6 ml-3 absolute`}
-        />
+    <div className=" w-full ">
+      {label && (
+        <InputLabel shrink htmlFor="bootstrap-input">
+          <span className="font-bold capitalize">{label}</span>
+        </InputLabel>
       )}
-      
-      <input
+      <TextField
+        fullWidth
         id={name}
-        className="w-full rounded-xl text-sm border  border-gray-300 px-10 mt-1 py-5
-         focus:outline-none focus:border focus:border-solid focus:border-blue-300 focus:transition-all
-         transition"
         type={Type}
+        disabled={disabled ?? false}
+        variant="outlined"
+        size={Size ?? "medium"}
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            borderRadius: "10px", // equivalente a rounded-xl
+            fontFamily: "Inter, sans-serif",
+            fontSize: "14px",
+          },
+        }}
         placeholder={Placeholder}
         {...registered}
         onChange={(e) => {
-          registered.onChange(e)
-          OnChange?.(e)
+          registered.onChange(e);
+          OnChange?.(e);
+        }}
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                {Icon && <Icon className={`size-5 text-gray-300 `} />}
+              </InputAdornment>
+            ),
+          },
         }}
       />
-
       {errors[`${name}`] && (
         <ErrorMessage>{errors[name]?.message as string}</ErrorMessage>
       )}

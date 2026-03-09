@@ -2,7 +2,7 @@
 const Divider = () => {
   return (
     <>
-      <div className="border-t my-5 border-solid border-gray-200 w-full h-0 rounded-full"></div>
+      <div className="border-t my-2.5 border-solid border-gray-200 w-full h-0 rounded-full"></div>
     </>
   );
 };

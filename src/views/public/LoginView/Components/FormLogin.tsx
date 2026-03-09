@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Mail, Key } from "lucide-react";
 import { Link } from "react-router-dom";
-import CircularProgress from "@mui/material/CircularProgress";
 import Input from "../../../../components/ui/Input";
 import Divider from "../../../../components/ui/Divider";
 import type { LoginForm } from "../../../../types";
@@ -31,8 +30,7 @@ const FormLogin = () => {
         message: "E-mail no válido",
       },
     },
-    password: { required: "El password es obligatorio.",
-     },
+    password: { required: "El password es obligatorio." },
   };
 
   const loginMutation = useMutation({
@@ -54,7 +52,7 @@ const FormLogin = () => {
     <>
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="bg-white px-10 lg:w-4/12  sm:w-10/12 mx-auto rounded-4xl flex flex-col shadow-lg  py-5 border border-solid border-gray-300 ">
+        className="bg-white px-10 lg:w-4/12  sm:w-10/12 mx-auto rounded-4xl flex flex-col gap-5 shadow-lg pt-10 pb-10 border border-solid border-gray-300 ">
         <Input
           Placeholder="Ingresa el email"
           label="Email"
@@ -76,7 +74,7 @@ const FormLogin = () => {
           Icon={Key}
         />
         <section className="w-full flex justify-end">
-          <span className="text-sm  my-3 text-end text-blue-600 font-medium ">
+          <span className="text-sm   text-end text-blue-600 font-medium ">
             He olvidado mi contraseña
           </span>
         </section>
@@ -88,7 +86,7 @@ const FormLogin = () => {
         <Divider />
         <section className="mx-auto w-fit">
           <span className="text-gray-500 ">¿No tinenes una Cuenta?</span>
-          <Link to="/auth/register" className="text-blue-600 font-semibold">
+          <Link to="/register" className="text-blue-600 font-semibold">
             {" "}
             Registrate
           </Link>

@@ -1,13 +1,13 @@
 import type { RegisterForm } from "../../../../types";
 import { Link } from "react-router-dom";
 import { Mail, User, IdCard, Key } from "lucide-react";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useForm } from "react-hook-form";
 import Divider from "../../../../components/ui/Divider";
 import Input from "../../../../components/ui/Input";
 import api from "../../../../config/axios";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
+import ButtonUI from "../../../../components/ui/Button";
 
 export default function FormRegister() {
   const initialValues: RegisterForm = {
@@ -68,7 +68,7 @@ export default function FormRegister() {
       <form
         onSubmit={handleSubmit(handleRegister)}
         className="bg-white px-10 lg:w-4/12  sm:w-10/12 mx-auto rounded-4xl flex flex-col shadow-lg  py-5 border border-solid border-gray-100 ">
-        <div className="grid grid-cols-1 space-y-3 ">
+        <div className="grid grid-cols-1 space-y-5 mb-5 ">
           <Input
             label="Nombre"
             name="name"
@@ -120,17 +120,18 @@ export default function FormRegister() {
             Placeholder="Repite el password anterior"
           />
         </div>
-        <input
-          type="submit"
-          className="bg-blue-600 px-3  my-5 py-2  text-white rounded-lg font-medium cursor-pointer">
-          Cerar Cuenta
-        </input>
+        
+        <ButtonUI
+         type="submit"
+         text="Crear cuenta"
+        />
+        
         <Divider />
         <span className="text-center py-3 text-gray-600 ">
           ¿Ya tienes una cuenta?
           <Link
             className="text-blue-600  font-semibold ml-2 "
-            to={"/auth/login"}>
+            to={"/login"}>
             Inicia Sesión
           </Link>
         </span>

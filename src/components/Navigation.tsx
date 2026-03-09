@@ -1,5 +1,6 @@
 import { BookMarked, User, LinkIcon } from "lucide-react";
 import type React from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 const tabs = [
   { name: "Mi Perfil", href: "/admin", icon: User },
@@ -11,6 +12,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function NavigationTabs() {
+  const [value, setValue] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,26 +21,11 @@ export default function NavigationTabs() {
   };
 
   return (
-    <div className="bg-white rounded-t-2xl border-t border-l border-r border-gray-200">
-      <div className="sm:hidden">
-        <label htmlFor="tabs" className="sr-only">
-          Select a tab
-        </label>
-        <select
-          id="tabs"
-          name="tabs"
-          className="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-          onChange={handleChange}>
-          {tabs.map((tab) => (
-            <option value={tab.href} key={tab.name}>
-              {tab.name}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className=" ">
 
-      <div className="hidden sm:block ">
-        <div className="border-blue-100">
+
+      <div className=" ">
+        <div className="">
           <nav className="-mb-px flex" aria-label="Tabs">
             {tabs.map((tab) => (
               <Link
@@ -48,18 +35,18 @@ export default function NavigationTabs() {
                   location.pathname === tab.href
                     ? "border-blue-500 text-blue-500 "
                     : "border-transparent text-gray-500 transition-all hover:border-gray-300 hover:text-gray-700",
-                  "group inline-flex font-semibold items-center border-b-2 py-4 px-6 text-sm"
+                  "group inline-flex font-semibold items-center  py-4 px-6 text-sm"
                 )}>
                 <tab.icon
                   className={classNames(
                     location.pathname === tab.href
-                      ? "text-blue-500"
+                      ? "text-blue-500 "
                       : "text-gray-500 group-hover:text-gray-500",
-                    "-ml-0.5 mr-2 size-4 transition-all"
+                    "-ml-0.5 mr-2 size-5 transition-all"
                   )}
                   aria-hidden="true"
                 />
-                <span className=" text-center">{tab.name}</span>
+               
               </Link>
             ))}
           </nav>

@@ -1,7 +1,6 @@
 import type { TUser } from "../../types";
-import NavigationTabs from "../../components/Navigation";
-import { SquareActivity } from "lucide-react";
-import Header from "../../components/header/Header";
+import { Header } from "../../components/header/Header";
+import ImageProfile from "../../views/private/ProfileView/Components/ImageProfile";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import ProfileLinks from "../../views/private/ProfileView/Components/ProfileLinks";
@@ -14,21 +13,27 @@ type DevTreeProps = {
 const AppLayout = ({ data }: DevTreeProps) => {
   return (
     <>
-      <Header user={data} />
+      <div className=" font-family-sans  justify-between ">
+        {/* <section className="w-fit">
+          <Sidebar />
+        </section> */}
+        <section className="col-span-12">
+          <Header user={data} />
+        </section>
 
-      <div className="  min-h-screen font-family-sans justify-between">
-        <section className=" flex justify-center  "></section>
-        <main className=" bg-slate-50 md:flex justify-between gap-7 w-full px-10">
-          <section className="md:w-2/7 mt-7">
+        <main className=" px-5 lg:grid grid-cols-12 gap-5   flex-1 bg-slate-100 min-h-[70vh]  ">
+          <section className="col-span-3 ">
             {data ? (
               <ProfileLinks data={data} />
             ) : (
               <Skeleton variant="rectangular" width={210} height={118} />
             )}
           </section>
-          <section className="gap-2 mt-7  md:w-5/7 ">
-            <NavigationTabs />
+          <section className="col-span-6 ">
             <Outlet />
+          </section>
+          <section className="col-span-3">
+            <ImageProfile data={data} />
           </section>
         </main>
       </div>
