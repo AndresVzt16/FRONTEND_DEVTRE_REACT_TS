@@ -33,7 +33,7 @@ const CardLink = ({ data }: CardLinkProps) => {
   const Icon = UIdataLink.Icon;
 
   return (
-    <article className="py-2 px-2 border rounded-xl bg-white   border-gray-200 flex items-center gap-2">
+    <article className="py-2 px-2 animate-fade-up border rounded-xl bg-white   border-gray-200 flex items-center gap-2">
       <div
         style={{ backgroundColor: UIdataLink.color }}
         className=" w-8 h-8 flex items-center justify-center shadow-md  text-white rounded-xl">

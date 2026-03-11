@@ -2,6 +2,7 @@ import { User } from "lucide-react";
 import { useState } from "react";
 import type { TUser } from "../../types";
 import Button from "@mui/material/Button";
+import { IoMdExit } from "react-icons/io";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
@@ -66,9 +67,9 @@ const MenuUI = ({ userData }: Props) => {
             vertical: "top",
             horizontal: "right",
           }}>
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleCloseSession}>Cerrar sesión</MenuItem>
+          <MenuItem onClick={handleCloseSession}>
+          <IoMdExit className="size-5"/>
+          Cerrar sesión</MenuItem>
         </Menu>
       </section>
     </>

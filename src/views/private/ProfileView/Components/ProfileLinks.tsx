@@ -1,27 +1,59 @@
 import { useEffect, useState } from "react";
-import type { TUser } from "../../../../types";
+import type { TagSkill, TUser } from "../../../../types";
 import { Calendar, Image } from "lucide-react";
-import type { SocialNetwork } from "../../../../types";
-import CardLink from "./CardLink";
 import TagInformation from "./TagInformation";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineUser } from "react-icons/ai";
 import Divider from "@mui/material/Divider";
+import IconButtonUI from "../../../../components/ui/IconButtonUI";
+import { useUpdateProfile } from "../../../../hooks/useUpdateProfile";
+import Chip from "@mui/material/Chip";
+import TagsForm from "./TagsForm";
+import { GoPlus } from "react-icons/go";
+import { useQueryClient } from "@tanstack/react-query";
+
 interface propsProfile {
   data: TUser;
 }
 
 const ProfileLinks = ({ data }: propsProfile) => {
-  const [links, setLinks] = useState(
-    JSON.parse(data.links).filter((link: SocialNetwork) => link.enabled),
-  );
+  const updateProfile = useUpdateProfile();
+  const queryClient = useQueryClient();
+  const user: TUser = queryClient.getQueryData(["user"])!;
+  const [tags, setTags] = useState(JSON.parse(data.tags));
+
   const [date, setDate] = useState(new Date(data.createdAt));
   const [modificationDate, setModificationDate] = useState(
     new Date(data.updatedAt),
   );
 
+  const [isOpenForm, setIsOpenForm] = useState(false);
+
+  const handleUpdateTags = () => {};
+
+  const handleOpenFormTag = () => {
+    setIsOpenForm(!isOpenForm);
+  };
+
+  const handleDelete = (tag: TagSkill) => {
+    console.log(tags);
+    console.log(tag);
+    const updatedTagsUser = tags.filter(
+      (item: TagSkill) => item.skill !== tag.skill,
+    );
+    setTags(updatedTagsUser);
+    queryClient.setQueryData(["user"], (prevData: TUser) => {
+      return {
+        ...prevData,
+        tags: JSON.stringify(updatedTagsUser),
+      };
+    });
+    const user: TUser = queryClient.getQueryData(["user"])!;
+    updateProfile.mutate(user);
+  };
+
   useEffect(() => {
-    setLinks(JSON.parse(data.links).filter((link: SocialNetwork) => link.enabled))
-  },[data])
+    setTags(JSON.parse(data.tags));
+  }, [data]);
   return (
     <>
       <article className="  py-5  ">
@@ -66,14 +98,46 @@ const ProfileLinks = ({ data }: propsProfile) => {
         </section>
         <Divider />
 
-        <section className=" grid grid-cols-1 gap-2.5 my-5">
-          <h2 className=" text-sm font-semibold text-neutral-800">
-            Enlaces disponibles
-          </h2>
-          {links.map((link: SocialNetwork) => (
-            <CardLink data={link} key={link.name}  />
-          ))}
-          <p></p>
+        <section className=" gap-2.5 my-5 ">
+          <div className=" flex justify-between flex-wrap">
+            <h2 className=" text-sm font-semibold text-neutral-800">Tags</h2>
+            <div className="flex gap-2.5">
+              <IconButtonUI
+                Color="info"
+                size="small"
+                Icon={GoPlus}
+                onClick={handleOpenFormTag}
+              />
+            </div>
+          </div>
+          <TagsForm
+            tags={tags}
+            setTags={setTags}
+            uploadProfile={handleUpdateTags}
+            status={isOpenForm}
+          />
+          <div className=" my-5  flex flex-col space-y-2.5">
+          <p className=" text-sm text-gray-800 font-semibold">Mis tags</p>
+          <div className=" flex gap-2 flex-wrap ">
+            {tags.map((tag: TagSkill) => (
+              <Chip
+                label={tag.skill}
+                variant="filled"
+                className="animate-fade-down animate-duration-300 shadow"
+                key={tag.skill}
+                size="small"
+                deleteIcon={<AiOutlineDelete />}
+                onDelete={() => handleDelete(tag)}
+                sx={{
+                  borderColor: "#0000",
+                  color: "#6366f1",
+                  backgroundColor:'#ffff'
+                }}
+              />
+            ))}
+         
+          </div>
+          </div>
         </section>
       </article>
     </>

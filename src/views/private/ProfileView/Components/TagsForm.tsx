@@ -1,60 +1,88 @@
-import type { TagSkill } from "../../../../types";
-import * as SiIcons from "react-icons/si";
-import ButtonUI from "../../../../components/ui/Button";
-import { PlusIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import Input from "../../../../components/ui/Input";
+import { use, useEffect, useState } from "react";
 import IconButtonUI from "../../../../components/ui/IconButtonUI";
+import { useForm } from "react-hook-form";
+import Collapse from "@mui/material/Collapse";
+import { SiGotomeeting } from "react-icons/si";
+import { useQueryClient } from "@tanstack/react-query";
+import Input from "../../../../components/ui/Input";
+import { useUpdateProfile } from "../../../../hooks/useUpdateProfile";
+import type { TagSkill, TUser } from "../../../../types";
+import { toast } from "sonner";
+import { FiSend } from "react-icons/fi";
+interface TagsFormProps {
+  status: boolean;
+  uploadProfile: () => void;
+  tags: TagSkill[];
+  setTags: (data: TagSkill[]) => void;
+}
 
-type TagsProps = {
-  tagsList: [TagSkill];
-};
-const TagsForm = ({ tagsList }: TagsProps) => {
-  const iconsList = {
-    SiIcons,
+const TagsForm = ({ status, uploadProfile, tags, setTags }: TagsFormProps) => {
+  const updateProfile = useUpdateProfile();
+  const queryClient = useQueryClient();
+  
+  const [isOpenForm, setIsOpenForm] = useState(status);
+  const defaultValues: TagSkill = {
+    skill: "",
   };
-  const defaultValues = {
-    name: "",
-    icon: "",
-  };
+
   const {
-    register,
     handleSubmit,
+    register,
     formState: { errors },
-  } = useForm({ defaultValues });
-  const rules = {};
+    reset
+  } = useForm<TagSkill>({ defaultValues });
+
+  const handleUploadTags = async (data: TagSkill) => {
+    const isExist = tags.some(
+      (tag: TagSkill) =>
+        tag.skill.toLocaleLowerCase() === data.skill.toLocaleLowerCase(),
+    );
+
+    if (isExist) {
+      toast.error("El tag que estas intentando agregar ya existe.");
+      return;
+    }
+    const updatedTags = [...tags, data];
+    setTags(updatedTags);
+    queryClient.setQueryData(["user"], (prevData: TUser) => {
+      return { ...prevData, tags: JSON.stringify(updatedTags) };
+    });
+    const user:TUser = queryClient.getQueryData(['user'])!
+    updateProfile.mutate(user)
+    reset()
+  };
+
+  const rules = {
+    tag: { required: "El tag no puede estar vacio" },
+  };
+  useEffect(() => {
+    setIsOpenForm(status);
+  }, [status]);
   return (
     <>
-      <div className=" rounded-xl mb-5">
-        <p className=" text-sm font-semibold py-2 px-1   w-full text-neutral-900">
-          Tags/Skills
-        </p>
-
-        <div className="flex gap-5 items-center">
-          <div className="flex-1">
+      <Collapse in={isOpenForm} timeout="auto" unmountOnExit>
+        <form onSubmit={handleSubmit(handleUploadTags)} className="mt-3">
+          <div className=" flex  items-start gap-2.5">
             <Input
               Type="text"
+              Icon={SiGotomeeting}
+              Size="small"
               errors={errors}
+          
+              name="skill"
               register={register}
-              name="nombre"
-              label="Nombre"
             />
+            <div className="flex w-1/4 gap-2">
+              <IconButtonUI
+                Color="info"
+                type="submit"
+                size="small"
+                Icon={FiSend}
+              />
+            </div>
           </div>
-
-          <ButtonUI text="Agregar" Icon={PlusIcon} />
-        </div>
-        <div className=" p-5 rounded-2xl border-gray-300 flex justify-center min-h-6">
-          {tagsList.length > 0 ? (
-            <section className=" grid grid-cols-3"></section>
-          ) : (
-            <section className="block">
-              <p className="text-gray-600 text-sm ">
-                -- No tienes tags creados --
-              </p>
-            </section>
-          )}
-        </div>
-      </div>
+        </form>
+      </Collapse>
     </>
   );
 };

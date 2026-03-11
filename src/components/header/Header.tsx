@@ -23,9 +23,8 @@ export function Header({ user }: HeaderProps) {
               </span>
             </div>
           </div>
+          {user && <NavigationTabs />}
           <div className=" flex justify-between">
-            {user && <NavigationTabs />}
-
             {/* User Menu */}
             {user && (
               <div className="flex items-center gap-4">
