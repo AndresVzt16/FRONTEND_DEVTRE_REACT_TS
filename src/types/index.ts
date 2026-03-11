@@ -23,8 +23,7 @@ export type LoginForm = Pick<TUser, "email"> & {
 };
 
 export type TagSkill = {
-  name:string,
-  icon:string
+  skill:string
 }
 export type ProfileForm = Pick<TUser, "handle" | "description" | 'name'>;
 

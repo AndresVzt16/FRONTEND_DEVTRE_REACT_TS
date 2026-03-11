@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import { darken, lighten, getContrastRatio } from "@mui/material/styles";
 
 type IconButtonProps = {
+  type?: "button" | "submit" | "reset";
   Icon: IconType;
   Color:
     | "primary"
@@ -19,7 +20,7 @@ type IconButtonProps = {
   onClick?: () => void;
 };
 
-const IconButtonUI = ({ Icon, Color, size, onClick }: IconButtonProps) => {
+const IconButtonUI = ({ Icon, Color, size, onClick, type }: IconButtonProps) => {
    const theme = useTheme();
 
   const baseColor =
@@ -34,7 +35,7 @@ const IconButtonUI = ({ Icon, Color, size, onClick }: IconButtonProps) => {
 
   return (
     <>
-      <IconButton color={Color} size={size ? size : "medium"} onClick={onClick}>
+      <IconButton type={type ? type: 'button'}  color={Color} size={size ? size : "medium"} onClick={onClick}>
         {Icon && <Icon color="currentColor" className={`size-5`} />}
       </IconButton>
     </>
