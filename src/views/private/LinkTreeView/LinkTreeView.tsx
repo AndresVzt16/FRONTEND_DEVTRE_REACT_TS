@@ -3,28 +3,17 @@ import Button from "../../../components/ui/Button";
 import { social } from "../../../data/social";
 import DevTreeInput from "./Components/DevTreeInput";
 import { Save } from "lucide-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateProfile } from "../../../services/Services";
-import { toast } from "sonner";
+import { useUpdateProfile } from "../../../hooks/useUpdateProfile";
+import { useQueryClient } from "@tanstack/react-query";
 import type { SocialNetwork, TUser } from "../../../types";
 
 const LinkTreeView = () => {
+  const mutation = useUpdateProfile()
   const [devTreeLinks, setDevTreeLinks] = useState(social);
   const queryClient = useQueryClient();
   const user: TUser = queryClient.getQueryData(["user"])!;
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: updateProfile,
-    onSuccess: (data) => {
-      toast.success(data.message);
-      /* invalidar los datos cacheados para ejecutar la nueva consulta con reactividad */
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-    },
 
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
   useEffect(() => {
     const updatedData = devTreeLinks.map((item) => {
       const userLink = JSON.parse(user.links).find(
@@ -39,27 +28,30 @@ const LinkTreeView = () => {
     setDevTreeLinks(updatedData);
   }, []);
   const hanldeUpdateProfile = () => {
-    mutate(user);
+    mutation.mutate(user)
   };
 
   
   return (
-    <div className=" flex flex-col  gap-5 pt-5  border-gray-200 mx-auto">
+    <div className=" flex flex-col  gap-5 py-5  border-gray-200 mx-auto">
       {devTreeLinks.map((item) => (
         <DevTreeInput
-
           item={item}
           key={item.name}
           setDevTreeLinks={setDevTreeLinks}
           DevtreeLinks={devTreeLinks}
         />
       ))}
+      <div className="flex justify-end">
+
       <Button
+        variant="contained"
         text="Guardar cambios"
         Icon={Save}
         fn={hanldeUpdateProfile}
-        loading={isPending}
+        loading={mutation.isPending}
       />
+      </div>
     </div>
   );
 };
