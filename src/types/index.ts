@@ -11,6 +11,7 @@ export type TUser = {
   imageId:string;
   links:string
   tags:string
+  location:string
 };
 
 export type RegisterForm = Pick<TUser, "handle" | "email" | "name"> & {
@@ -25,10 +26,10 @@ export type LoginForm = Pick<TUser, "email"> & {
 export type TagSkill = {
   skill:string
 }
-export type ProfileForm = Pick<TUser, "handle" | "description" | 'name'>;
+export type ProfileForm = Pick<TUser, "handle" | "description" | 'name' | 'location'>;
 
 export type SocialNetwork = {
-  id: Number;
+  id: number;
   name: string;
   url: string;
   enabled: boolean;

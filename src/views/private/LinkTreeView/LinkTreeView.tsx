@@ -34,10 +34,10 @@ const LinkTreeView = () => {
   
   return (
     <div className=" flex flex-col  gap-5 py-5  border-gray-200 mx-auto">
-      {devTreeLinks.map((item) => (
+      {devTreeLinks.map((item, index) => (
         <DevTreeInput
           item={item}
-          key={item.name}
+          key={item.name + index}
           setDevTreeLinks={setDevTreeLinks}
           DevtreeLinks={devTreeLinks}
         />

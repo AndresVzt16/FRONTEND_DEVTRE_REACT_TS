@@ -10,6 +10,7 @@ import Chip from "@mui/material/Chip";
 import TagsForm from "./TagsForm";
 import { GoPlus } from "react-icons/go";
 import { useQueryClient } from "@tanstack/react-query";
+import Avatar from "@mui/material/Avatar";
 
 interface propsProfile {
   data: TUser;
@@ -98,10 +99,10 @@ const ProfileLinks = ({ data }: propsProfile) => {
         </section>
         <Divider />
 
-        <section className=" gap-2.5 my-5 ">
+        <section className=" gap-2.5 my-5 p-3 rounded-2xl" >
           <div className=" flex justify-between flex-wrap">
             <h2 className=" text-sm font-semibold text-neutral-800">Tags</h2>
-            <div className="flex gap-2.5">
+            <div className="flex gap-2.5  ">
               <IconButtonUI
                 Color="info"
                 size="small"
@@ -116,23 +117,21 @@ const ProfileLinks = ({ data }: propsProfile) => {
             uploadProfile={handleUpdateTags}
             status={isOpenForm}
           />
-          <div className=" my-5  flex flex-col space-y-2.5">
+          <div className="  flex flex-col space-y-2.5">
           <p className=" text-sm text-gray-800 font-semibold">Mis tags</p>
-          <div className=" flex gap-2 flex-wrap ">
+          <div className=" flex gap-2 flex-wrap   ">
             {tags.map((tag: TagSkill) => (
               <Chip
-                label={tag.skill}
-                variant="filled"
+                label={`#${tag.skill}`}
+                variant="outlined"
                 className="animate-fade-down animate-duration-300 shadow"
                 key={tag.skill}
                 size="small"
-                deleteIcon={<AiOutlineDelete />}
+                
                 onDelete={() => handleDelete(tag)}
-                sx={{
-                  borderColor: "#0000",
-                  color: "#6366f1",
-                  backgroundColor:'#ffff'
-                }}
+                color="secondary"
+                
+
               />
             ))}
          

@@ -49,6 +49,7 @@ export default function ProfileView() {
     user.description = dataForm.description
     user.handle = dataForm.handle
     user.name = dataForm.name
+    user.location = dataForm.location
     /* console.log(data) */
     profileUpdateMutation.mutate(user);
   };

@@ -46,6 +46,7 @@ const DevTreeInput = ({
   });
 
   const key = item.name.toLowerCase().trim();
+  
 
   const icons: Record<string, IconType | undefined> = {
     facebook: FiFacebook,
@@ -72,7 +73,7 @@ const DevTreeInput = ({
         ? { ...link, url: e.target.value, enabled: false }
         : link,
     );
-    
+
     setDevTreeLinks(updateLinks);
   };
 
@@ -92,11 +93,67 @@ const DevTreeInput = ({
     });
     setDevTreeLinks(updateStatusLinks);
 
-    console.log(updateStatusLinks);
+    const links: SocialNetwork[] = JSON.parse(user.links);
+
+    const selectedSocialNetwork = updateStatusLinks.find(
+      (item) => item.name === socialNetwork,
+    );
+
+    let updatedItems: SocialNetwork[] = [];
+
+    const id = links.filter((link) => link.id > 0).length + 1;
+    if (selectedSocialNetwork?.enabled) {
+      console.log("Habilitando", selectedSocialNetwork);
+      if (links.some((link) => link.name === socialNetwork)) {
+        updatedItems = links.map((item) => {
+          if (item.name === socialNetwork) {
+            return {
+              ...item,
+              enabled: true,
+              id,
+            };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        const newItem = {
+          ...selectedSocialNetwork,
+          id,
+        };
+        updatedItems = [...links, newItem];
+      }
+    } else {
+      console.log(socialNetwork);
+
+      updatedItems = links.filter((link) => link.name !== socialNetwork);
+      const indexToUpdate = links.findIndex(
+        (link) => link.name === socialNetwork,
+      );
+      updatedItems = links.map((link) => {
+        if (link.name === socialNetwork) {
+          return {
+            ...link,
+            id: 0,
+            enabled: false,
+          };
+        } else if (link.id > indexToUpdate) {
+          return {
+            ...link,
+            id: link.id - 1,
+          };
+        } else {
+          return link;
+        }
+      });
+      console.log(updatedItems);
+    }
+
+    console.log(updatedItems);
     queryClient.setQueryData(["user"], (prevData: TUser) => {
       return {
         ...prevData,
-        links: JSON.stringify(updateStatusLinks),
+        links: JSON.stringify(updatedItems),
       };
     });
   };
@@ -138,7 +195,7 @@ const DevTreeInput = ({
           rules={rules.socialGenericRule}
           Icon={icons[key]}
           OnChange={handleChangeUrl}
-          Size="small"
+          Size="medium"
         />
       </div>
       <div className="flex items-center ">
