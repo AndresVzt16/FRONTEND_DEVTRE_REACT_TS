@@ -46,7 +46,6 @@ const DevTreeInput = ({
   });
 
   const key = item.name.toLowerCase().trim();
-  
 
   const icons: Record<string, IconType | undefined> = {
     facebook: FiFacebook,
@@ -137,7 +136,7 @@ const DevTreeInput = ({
             id: 0,
             enabled: false,
           };
-        } else if (link.id > indexToUpdate) {
+        } else if (link.id > indexToUpdate /* && ( indexToUpdate!== 0  && link.id === 1) */) {
           return {
             ...link,
             id: link.id - 1,

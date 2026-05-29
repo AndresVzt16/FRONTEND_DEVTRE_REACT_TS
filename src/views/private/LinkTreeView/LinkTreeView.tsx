@@ -24,11 +24,14 @@ const LinkTreeView = () => {
       }
       return item;
     });
+
+    
     
     setDevTreeLinks(updatedData);
   }, []);
   const hanldeUpdateProfile = () => {
-    mutation.mutate(user)
+    const currentDataUser:TUser = queryClient.getQueryData(["user"])!
+    mutation.mutate(currentDataUser)
   };
 
   

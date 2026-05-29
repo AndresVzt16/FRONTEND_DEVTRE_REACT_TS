@@ -39,10 +39,10 @@ const Input = ({
 }: InputProps) => {
   const registered = register(name, rules);
   return (
-    <div className=" w-full ">
+    <div className=" w-full  ">
       {label && (
         <InputLabel shrink htmlFor="bootstrap-input">
-          <span className="font-bold capitalize">{label}</span>
+          <span className="font-bold text-gray-800 capitalize font-family-sans">{label}</span>
         </InputLabel>
       )}
       <TextField
@@ -54,7 +54,7 @@ const Input = ({
         size={Size ?? "medium"}
         sx={{
           "& .MuiOutlinedInput-root": {
-            borderRadius: "10px", // equivalente a rounded-xl
+            borderRadius: "8px", // equivalente a rounded-xl
             fontFamily: "Inter, sans-serif",
             fontSize: "14px",
           },

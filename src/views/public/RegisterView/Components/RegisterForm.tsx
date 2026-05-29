@@ -60,7 +60,6 @@ export default function FormRegister() {
       }
     }
   };
-
   const password = watch("password");
 
   return (
@@ -120,12 +119,10 @@ export default function FormRegister() {
             Placeholder="Repite el password anterior"
           />
         </div>
-        
         <ButtonUI
          type="submit"
          text="Crear cuenta"
         />
-        
         <Divider />
         <span className="text-center py-3 text-gray-600 ">
           ¿Ya tienes una cuenta?

@@ -1,6 +1,6 @@
-import Card from "@mui/material/Card";
-import React, { useState } from "react";
-import CardContent from "@mui/material/CardContent";
+import { useState } from "react";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 import type { SocialNetwork } from "../../../../types";
 import {
   FiFacebook,
@@ -32,15 +32,33 @@ const CardLink = ({ data }: CardLinkProps) => {
   const [UIdataLink, setUIDataLink] = useState(icons[data.name] ?? null);
   const Icon = UIdataLink.Icon;
 
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: data.id,
+    });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   return (
-    <article className="py-2 px-2 animate-fade-up border rounded-xl bg-white   border-gray-200 flex items-center gap-2">
+    <article
+      ref={setNodeRef}
+      className="py-2 px-2 shadow-md  border rounded-xl bg-white cursor-pointer  border-gray-200 flex items-center gap-2"
+      style={style}
+      {...attributes}
+      {...listeners}>
       <div
         style={{ backgroundColor: UIdataLink.color }}
         className=" w-8 h-8 flex items-center justify-center shadow-md  text-white rounded-xl">
         {Icon && <Icon className="size-4" />}
       </div>
       <h1 className=" text-sm">
-        Visitame en <a href={`${data.url}`} className="font-bold text-gray-900 capitalize">{data.name}</a>
+        Visitame en{" "}
+        <a href={`${data.url}`} className="font-bold text-gray-900 capitalize">
+          {data.name}
+        </a>
       </h1>
     </article>
   );

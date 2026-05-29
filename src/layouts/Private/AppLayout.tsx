@@ -5,12 +5,14 @@ import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import ProfileLinks from "../../views/private/ProfileView/Components/ProfileLinks";
 import Skeleton from "@mui/material/Skeleton";
+import {useAuth, SignOutButton, Show} from '@clerk/react'
 
 type DevTreeProps = {
   data: TUser;
 };
 
 const AppLayout = ({ data }: DevTreeProps) => {
+
   return (
     <>
       <div className=" font-family-sans  justify-between ">
@@ -21,7 +23,7 @@ const AppLayout = ({ data }: DevTreeProps) => {
           <Header user={data} />
         </section>
 
-        <main className=" px-5 lg:grid grid-cols-12 gap-5   flex-1 bg-slate-100 min-h-[70vh]  ">
+        <main className=" px-5 lg:grid grid-cols-12 gap-5   flex-1 bg-slate-50 min-h-[70vh]  ">
           <section className="col-span-3 ">
             {data ? (
               <ProfileLinks data={data} />

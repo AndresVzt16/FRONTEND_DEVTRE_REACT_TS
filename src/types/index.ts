@@ -8,11 +8,16 @@ export type TUser = {
   image: string;
   createdAt: string;
   updatedAt: string;
-  imageId:string;
-  links:string
-  tags:string
-  location:string
+  imageId: string;
+  links: string;
+  tags: string;
+  location: string;
 };
+
+export type UserHandle = Pick<
+  TUser,
+  "description" | "handle" | "image" | "links" | "tags" | "location" | "name" | "email"
+>;
 
 export type RegisterForm = Pick<TUser, "handle" | "email" | "name"> & {
   password: string;
@@ -24,9 +29,12 @@ export type LoginForm = Pick<TUser, "email"> & {
 };
 
 export type TagSkill = {
-  skill:string
-}
-export type ProfileForm = Pick<TUser, "handle" | "description" | 'name' | 'location'>;
+  skill: string;
+};
+export type ProfileForm = Pick<
+  TUser,
+  "handle" | "description" | "name" | "location"
+>;
 
 export type SocialNetwork = {
   id: number;
