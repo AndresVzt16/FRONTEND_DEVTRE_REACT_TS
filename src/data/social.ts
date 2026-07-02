@@ -1,4 +1,5 @@
 import type { DevtreeLink } from "../types"
+import type {SimpleIcon} from 'simple-icons';
 
 export const social: DevtreeLink[] = [
     { name: 'facebook', url: '', enabled: false },
@@ -10,3 +11,5 @@ export const social: DevtreeLink[] = [
     { name: 'twitch', url: '', enabled: false },
     { name: 'linkedin', url: '', enabled: false },
 ]
+
+

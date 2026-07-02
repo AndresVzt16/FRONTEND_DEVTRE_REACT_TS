@@ -18,7 +18,7 @@ const TagInformation = ({ Label, Icon, value, color }: TagInformationProps) => {
 
   return (
     <article
-      className={`w-full space-y-2.5 flex rounded-2xl border border-gray-200 animate-ease-out ${bgClass}`}
+      className={`w-fit space-y-2.5 flex rounded-2xl border border-gray-200 animate-ease-out ${bgClass}`}
       style={bgStyle}>
       <div
         className={`flex  items-center gap-2.5 text-sm w-full text-slate-600 px-3 py-2 `}
