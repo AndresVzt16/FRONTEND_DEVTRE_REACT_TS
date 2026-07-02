@@ -3,6 +3,27 @@ import Skeleton from "@mui/material/Skeleton";
 const AppLayoutSkeleton = () => {
   return (
     <>
+      <section className="px-5 pt-5">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 px-5 py-4 shadow-[0_20px_60px_-24px_rgba(15,23,42,0.7)]">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(15,23,42,0.98),rgba(15,23,42,0.92))]" />
+          <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-start gap-4">
+              <Skeleton variant="rounded" width={48} height={48} sx={{ bgcolor: 'rgba(255,255,255,0.12)' }} />
+              <div className="space-y-2">
+                <Skeleton variant="rounded" width={180} height={24} sx={{ bgcolor: 'rgba(255,255,255,0.12)' }} />
+                <Skeleton variant="text" width={320} height={20} sx={{ bgcolor: 'rgba(255,255,255,0.12)' }} />
+                <Skeleton variant="text" width={260} height={20} sx={{ bgcolor: 'rgba(255,255,255,0.12)' }} />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Skeleton variant="rounded" width={130} height={56} sx={{ bgcolor: 'rgba(255,255,255,0.12)' }} />
+              <Skeleton variant="rounded" width={170} height={48} sx={{ bgcolor: 'rgba(255,255,255,0.12)' }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Header */}
       <header className="px-10 py-4 border-b border-gray-300">
         <div className="flex items-center gap-4">

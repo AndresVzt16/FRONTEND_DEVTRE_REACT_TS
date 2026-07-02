@@ -14,7 +14,9 @@ const Profile = () => {
 
   })
 
-  if(isLoading) return 'Cargando....'
+  
+
+  if(isLoading) return ''
   if(error) return <Navigate to={'/404'}/>
   if(data)return <HandleProfile data={data}/>
 }

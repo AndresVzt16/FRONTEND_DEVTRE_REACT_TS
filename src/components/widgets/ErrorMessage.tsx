@@ -1,13 +1,18 @@
+import Alert from "@mui/material/Alert";
+import Collapse from "@mui/material/Collapse";
 import { ShieldX } from "lucide-react";
+import { MdError } from "react-icons/md";
 const ErrorMessage = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <article className="bg-red-50 mt-0 py-2 px-4 text-red-600 rounded flex gap-2 items-center">
-        <ShieldX className="size-4" />
-        <p className=" text-sm font-medium">
+    <Collapse in={!!children}  timeout={300}>
+      <Alert severity="error">
+        
+        <p className=" text-sm font-medium text-red-600 text-sm">
           {children}
         </p>
-      </article>
+      </Alert>
+    </Collapse>
     </>
   );
 };

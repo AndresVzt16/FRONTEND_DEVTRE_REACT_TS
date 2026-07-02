@@ -54,10 +54,11 @@ const FormLogin = () => {
         onSubmit={handleSubmit(handleLogin)}
         className="bg-white px-12 xs:max-w-xs   sm:max-w-md mx-auto rounded-xl flex flex-col gap-5 shadow-lg pt-10 pb-10 border border-solid border-gray-300 ">
         <section className="text-center  justify-center h-full">
-          <h2 className=" text-center text-gray-900 text-2xl font-semibold">
+          <img src="/logo.svg" alt="" className="size-12 mx-auto" />
+          <h2 className=" text-center text-gray-900 text-xl font-semibold">
             Iniciar Sesión
           </h2>
-          <span className=" text-center text-sm text-gray-500 my-2 block ">
+          <span className=" text-left text-xs text-gray-500 mt-2 block ">
             Comienza a compartir tu perfil de desarrollador hoy
           </span>
         </section>
@@ -95,8 +96,8 @@ const FormLogin = () => {
         />
         <Divider />
         <section className="mx-auto w-fit">
-          <span className="text-gray-500 ">¿No tinenes una Cuenta?</span>
-          <Link to="/register" className="text-blue-600 font-semibold">
+          <span className="text-gray-500  text-sm">¿No tinenes una Cuenta?</span>
+          <Link to="/register" className="text-blue-600 font-semibold text-sm">
             {" "}
             Registrate
           </Link>

@@ -79,10 +79,10 @@ const ProfileLinks = ({ data }: propsProfile) => {
           </section>
         </section>
 
-        <section className="flex flex-wrap  gap-2.5 my-10  ">
-          <h2 className=" text-sm font-semibold text-neutral-700">
+          <h2 className=" text-sm font-semibold text-neutral-700 my-5">
             Datos Informativos
           </h2>
+        <section className="flex flex-wrap  gap-2.5 mb-5  ">
           <TagInformation
             Label={"Miembro desde"}
             color={"bg-gray-50"}

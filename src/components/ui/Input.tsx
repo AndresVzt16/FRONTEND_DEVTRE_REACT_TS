@@ -42,7 +42,9 @@ const Input = ({
     <div className=" w-full  ">
       {label && (
         <InputLabel shrink htmlFor="bootstrap-input">
-          <span className="font-bold text-gray-800 capitalize font-family-sans">{label}</span>
+          <span className="font-bold text-gray-800 capitalize font-family-sans">
+            {label}
+          </span>
         </InputLabel>
       )}
       <TextField
@@ -75,9 +77,7 @@ const Input = ({
           },
         }}
       />
-      {errors[`${name}`] && (
-        <ErrorMessage>{errors[name]?.message as string}</ErrorMessage>
-      )}
+      <ErrorMessage>{errors[name]?.message as string}</ErrorMessage>
     </div>
   );
 };

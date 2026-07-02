@@ -56,7 +56,7 @@ const CardLink = ({ data }: CardLinkProps) => {
       </div>
       <h1 className=" text-sm">
         Visitame en{" "}
-        <a href={`${data.url}`} className="font-bold text-gray-900 capitalize">
+        <a href={`${data.url}`} target="_blank" className="font-bold text-gray-900 capitalize">
           {data.name}
         </a>
       </h1>
