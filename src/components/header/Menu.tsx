@@ -1,7 +1,6 @@
 import { User } from "lucide-react";
 import { useState } from "react";
 import type { TUser } from "../../types";
-import Button from "@mui/material/Button";
 import { IoMdExit } from "react-icons/io";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";

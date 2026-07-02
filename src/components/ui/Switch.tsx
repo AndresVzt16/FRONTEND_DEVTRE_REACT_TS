@@ -1,4 +1,3 @@
-import React from "react";
 import { Switch } from "@headlessui/react";
 import { classNames } from "../../utils";
 import type { DevtreeLink } from "../../types";

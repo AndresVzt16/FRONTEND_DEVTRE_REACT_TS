@@ -1,5 +1,4 @@
-import type { DevtreeLink } from "../types"
-import type {SimpleIcon} from 'simple-icons';
+import type { DevtreeLink } from "../types";
 
 export const social: DevtreeLink[] = [
     { name: 'facebook', url: '', enabled: false },

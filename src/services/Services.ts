@@ -1,7 +1,7 @@
 import { isAxiosError } from "axios";
 import api from "../config/axios";
 
-import type { ProfileForm, TUser, UserHandle } from "../types";
+import type { TUser, UserHandle } from "../types";
 import type { LoginForm } from "../types";
 
 export async function authenticateUser(formData: LoginForm) {

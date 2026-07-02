@@ -1,6 +1,4 @@
-import React from "react";
 import type { UserHandle } from "../../../../types";
-import { motion } from "motion/react";
 import CardProfile from "./CardProfile";
 
 type DataHandleProps = {

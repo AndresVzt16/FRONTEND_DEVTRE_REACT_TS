@@ -1,6 +1,5 @@
 import { updateProfile, uploadImage } from "../../../services/Services";
 import ProfileForms from "./Components/ProfileForm";
-import ImageProfile from "./Components/ImageProfile";
 import type { ProfileForm, TUser } from "../../../types";
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";

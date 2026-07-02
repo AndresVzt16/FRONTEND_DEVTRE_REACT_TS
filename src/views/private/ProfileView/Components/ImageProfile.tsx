@@ -12,7 +12,6 @@ import { IoLocationOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { useQueryClient } from "@tanstack/react-query";
 import { MdOutlineRememberMe } from "react-icons/md";
-import { CiShare2 } from "react-icons/ci";
 import type { TagSkill } from "../../../../types";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";

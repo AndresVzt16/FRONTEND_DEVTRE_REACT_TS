@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { TagSkill, TUser } from "../../../../types";
 import { Calendar, Image } from "lucide-react";
 import TagInformation from "./TagInformation";
-import { AiOutlineDelete, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
 import Divider from "@mui/material/Divider";
 import IconButtonUI from "../../../../components/ui/IconButtonUI";
 import { useUpdateProfile } from "../../../../hooks/useUpdateProfile";
@@ -10,7 +10,6 @@ import Chip from "@mui/material/Chip";
 import TagsForm from "./TagsForm";
 import { GoPlus } from "react-icons/go";
 import { useQueryClient } from "@tanstack/react-query";
-import Avatar from "@mui/material/Avatar";
 
 interface propsProfile {
   data: TUser;

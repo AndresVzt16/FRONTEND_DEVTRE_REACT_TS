@@ -33,7 +33,6 @@ const DevTreeInput = ({
 }: DevtreInputProps) => {
   const queryClient = useQueryClient();
   const user: TUser = queryClient.getQueryData(["user"])!;
-  const mutation = useUpdateProfile();
 
   const {
     register,

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import type { SocialNetwork, TagSkill, TUser, UserHandle } from "../../../../types";
+import { useEffect, useState } from "react";
+import type { SocialNetwork, TagSkill, UserHandle } from "../../../../types";
 import CardLink from "../../../private/ProfileView/Components/CardLink";
-import Divider from "@mui/material/Divider";
 import { IoLocationOutline } from "react-icons/io5";
 import Chip from "@mui/material/Chip";
 import TagInformation from "../../../private/ProfileView/Components/TagInformation";

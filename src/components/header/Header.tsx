@@ -1,13 +1,9 @@
-import { Code2, Bell, Settings } from "lucide-react";
+import { Bell, Settings } from "lucide-react";
 import IconButtonUI from "../ui/IconButtonUI";
-import { ImageWithFallback } from "../ui/ImageWithFallback";
-import { TbUserUp } from "react-icons/tb";
-import { CiLogin } from "react-icons/ci";
 import MenuUI from "./Menu";
 import type { TUser } from "../../types";
 import NavigationTabs from "../Navigation";
-import ButtonUI from "../ui/Button";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 interface HeaderProps {
   user?: TUser;
 }
@@ -18,12 +14,6 @@ export function Header({ user }: HeaderProps) {
 
   const isHomeLocation = location.pathname === "/";
 
-  const handleLogin = () => {
-    navigate("/login");
-  };
-  const handleSignUp = () => {
-    navigate("/register");
-  };
   return (
     <header className="bg-white-50 border-b bg-white border-gray-200 ">
       <div className=" px-5  mx-auto ">

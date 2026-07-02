@@ -1,7 +1,5 @@
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
-import { ShieldX } from "lucide-react";
-import { MdError } from "react-icons/md";
 const ErrorMessage = ({ children }: { children: React.ReactNode }) => {
   return (
     <>

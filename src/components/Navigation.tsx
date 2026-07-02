@@ -1,7 +1,5 @@
-import { BookMarked, User, LinkIcon } from "lucide-react";
-import type React from "react";
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { User, LinkIcon } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 const tabs = [
   { name: "Mi Perfil", href: "/admin", icon: User },
   { name: "Links", href: "/admin/links", icon: LinkIcon },
@@ -12,13 +10,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function NavigationTabs() {
-  const [value, setValue] = useState(0);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    navigate(e.target.value);
-  };
 
   return (
     <div className=" ">
