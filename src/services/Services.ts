@@ -1,6 +1,7 @@
 import { isAxiosError } from "axios";
 import api from "../config/axios";
-import type { ProfileForm, TUser } from "../types";
+
+import type { ProfileForm, TUser, UserHandle } from "../types";
 import type { LoginForm } from "../types";
 
 export async function authenticateUser(formData: LoginForm) {
@@ -13,6 +14,7 @@ export async function authenticateUser(formData: LoginForm) {
       throw new Error(error.response.data.error);
   }
 }
+
 
 export async function getUser() {
   try {
@@ -60,5 +62,31 @@ export async function uploadImage(file: File) {
     if (isAxiosError(error) && error.response) {
       throw new Error(error.response.data.error);
     }
+  }
+}
+
+
+export async function getUserByHandle(handle: String) {
+  try {
+    
+    const { data } = await api<UserHandle>(`/${handle}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+
+export async function searchHandle(handle:String){
+  try {
+    const {data} = await api.post<string>('/search', {handle})
+    return data
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+    
   }
 }

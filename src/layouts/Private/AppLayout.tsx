@@ -5,6 +5,8 @@ import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import ProfileLinks from "../../views/private/ProfileView/Components/ProfileLinks";
 import Skeleton from "@mui/material/Skeleton";
+import { Sparkles, ShieldCheck, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type DevTreeProps = {
   data: TUser;
@@ -13,7 +15,7 @@ type DevTreeProps = {
 const AppLayout = ({ data }: DevTreeProps) => {
   return (
     <>
-      <div className=" font-family-sans  justify-between ">
+      <div className="font-family-sans  justify-between">
         {/* <section className="w-fit">
           <Sidebar />
         </section> */}
@@ -30,6 +32,7 @@ const AppLayout = ({ data }: DevTreeProps) => {
             )}
           </section>
           <section className="col-span-6 ">
+          
             <Outlet />
           </section>
           <section className="col-span-3">

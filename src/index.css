@@ -15,6 +15,19 @@
   --color-avocado-800: oklch(0.23 0.08 116.19);
   --color-avocado-900: oklch(0.14 0.06 115.45);
 
+  /* crear colores oscuros para fondos  */
+  --color-dark-100: oklch(0.15 0.05 120);
+  --color-dark-200: oklch(0.10 0.04 120);
+  --color-dark-300: oklch(0.05 0.03 120);
+
+/* fondo oscuro azulado */
+  --color-dark-blue-100: oklch(0.20 0.10 240);
+  --color-dark-blue-200: oklch(0.15 0.08 240);
+  --color-dark-blue-300: oklch(0.10 0.06 240);
+
+  --bg-main: url('./bg.svg'); ;
+
+
 
 /* Colores Primarios */
 

@@ -5,10 +5,9 @@ import { Toaster } from "sonner";
 export default function AuthLayout() {
   return (
     <>
-      <div className="min-h-screen flex flex-col font-family-sans">
-        <Header />
-
-        <div className="flex-1 flex items-center bg-slate-100 w-full">
+      <Header />
+      <div className=" font-family-sans">
+        <div className="bg-slate-50">
           <Outlet />
         </div>
       </div>

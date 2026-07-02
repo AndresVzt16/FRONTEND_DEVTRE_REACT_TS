@@ -24,20 +24,23 @@ const LinkTreeView = () => {
       }
       return item;
     });
+
+    
     
     setDevTreeLinks(updatedData);
   }, []);
   const hanldeUpdateProfile = () => {
-    mutation.mutate(user)
+    const currentDataUser:TUser = queryClient.getQueryData(["user"])!
+    mutation.mutate(currentDataUser)
   };
 
   
   return (
     <div className=" flex flex-col  gap-5 py-5  border-gray-200 mx-auto">
-      {devTreeLinks.map((item) => (
+      {devTreeLinks.map((item, index) => (
         <DevTreeInput
           item={item}
-          key={item.name}
+          key={item.name + index}
           setDevTreeLinks={setDevTreeLinks}
           DevtreeLinks={devTreeLinks}
         />

@@ -19,7 +19,7 @@ interface TagsFormProps {
 const TagsForm = ({ status, uploadProfile, tags, setTags }: TagsFormProps) => {
   const updateProfile = useUpdateProfile();
   const queryClient = useQueryClient();
-  
+
   const [isOpenForm, setIsOpenForm] = useState(status);
   const defaultValues: TagSkill = {
     skill: "",
@@ -29,7 +29,7 @@ const TagsForm = ({ status, uploadProfile, tags, setTags }: TagsFormProps) => {
     handleSubmit,
     register,
     formState: { errors },
-    reset
+    reset,
   } = useForm<TagSkill>({ defaultValues });
 
   const handleUploadTags = async (data: TagSkill) => {
@@ -47,9 +47,10 @@ const TagsForm = ({ status, uploadProfile, tags, setTags }: TagsFormProps) => {
     queryClient.setQueryData(["user"], (prevData: TUser) => {
       return { ...prevData, tags: JSON.stringify(updatedTags) };
     });
-    const user:TUser = queryClient.getQueryData(['user'])!
-    updateProfile.mutate(user)
-    reset()
+    const user: TUser = queryClient.getQueryData(["user"])!;
+    updateProfile.mutate(user);
+
+    reset();
   };
 
   const rules = {
@@ -61,18 +62,18 @@ const TagsForm = ({ status, uploadProfile, tags, setTags }: TagsFormProps) => {
   return (
     <>
       <Collapse in={isOpenForm} timeout="auto" unmountOnExit>
-        <form onSubmit={handleSubmit(handleUploadTags)} className="mt-3">
-          <div className=" flex  items-start gap-2.5">
+        <form onSubmit={handleSubmit(handleUploadTags)} className="my-2">
+          <div className=" flex gap-2.5 items-center ">
             <Input
               Type="text"
               Icon={SiGotomeeting}
               Size="small"
               errors={errors}
-          
               name="skill"
               register={register}
             />
-            <div className="flex w-1/4 gap-2">
+
+            <div className=" flex  items-center h-full ">
               <IconButtonUI
                 Color="info"
                 type="submit"
