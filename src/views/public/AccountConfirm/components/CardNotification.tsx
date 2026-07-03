@@ -17,25 +17,30 @@ const CardNotification = ({
   data,
   error,
 }: CardNotificationProps) => {
-  if (isLoading) return <CircularProgress />;
   return (
     <>
       <Card>
         <HeaderCard>
           <article className=" flex justify-center">
-            {isError ? (
-              <XCircle className="size-16 text-red-500" />
+            {isLoading ? (
+              
+              <CircularProgress />
+
             ) : (
-              <CheckCircle className="size-16 text-green-500" />
+              < >
+                {isError ? (
+                  <XCircle className="size-16 text-red-500" />
+                ) : (
+                  <CheckCircle className="size-16 text-green-500" />
+                )}
+                <h1 className="text-2xl font-bold">{`${isError ? error.message : data.message}`}</h1>
+              </>
             )}
           </article>
-          <h1 className="text-2xl font-bold">{`${isError ? error.message : data}`}</h1>
         </HeaderCard>
         <Divider />
-        
       </Card>
     </>
-    
   );
   /* if (isError) return <ErrorMessage >{error.message}</ErrorMessage> ; */
 };
