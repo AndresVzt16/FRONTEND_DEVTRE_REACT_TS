@@ -1,5 +1,5 @@
 import type { RegisterForm } from "../../../../types";
-import { Link, useLocation } from "react-router-dom";
+import { data, Link, useLocation } from "react-router-dom";
 import { Mail, User, IdCard, Key } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Divider from "../../../../components/ui/Divider";
@@ -8,15 +8,15 @@ import api from "../../../../config/axios";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
 import ButtonUI from "../../../../components/ui/Button";
-
+import { useMutation } from "@tanstack/react-query";
+import { registerUser } from "../../../../services/Services";
 export default function FormRegister() {
+  const location = useLocation();
 
-  const location = useLocation()
-  
   const initialValues: RegisterForm = {
     name: "",
     email: "",
-    handle: location.state?.handle || '',
+    handle: location.state?.handle || "",
     password: "",
     password_confirmation: "",
   };
@@ -51,17 +51,17 @@ export default function FormRegister() {
     },
   };
 
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: registerUser,
+    mutationKey: ["RegisterUser"],
+    onError: (e) => {
+      toast.error(e.message);
+    },
+    onSuccess:(data) => {toast.success(data.message)},
+  });
+
   const handleRegister = async (formData: RegisterForm) => {
-    const url = `/auth/register`;
-    try {
-      const { data } = await api.post(url, formData);
-      toast.success(data.message);
-      reset();
-    } catch (error) {
-      if (isAxiosError(error) && error.response) {
-        toast.error(error.response.data.error);
-      }
-    }
+    mutate(formData);
   };
   const password = watch("password");
 
@@ -133,9 +133,9 @@ export default function FormRegister() {
               Placeholder="Repite el password anterior"
               Size="small"
             />
-            <ButtonUI type="submit" text="Crear cuenta" />
+            <ButtonUI loading={isPending} type="submit" text="Crear cuenta" />
           </div>
-         <Divider/>
+          <Divider />
           <section className=" w-full pt-3">
             <p className="text-center text-sm text-gray-950  w-full">
               ¿Ya tienes una cuenta?
